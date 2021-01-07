@@ -5,10 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoFixture.AutoMoq" Version="4.15.0" />
+    <PackageReference Include="AutoFixture.Xunit2" Version="4.15.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="5.0.0" />
+    <PackageReference Include="Moq" Version="4.15.2" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\OrderValidation.Basket\OrderValidation.Basket.csproj" />
     <ProjectReference Include="..\OrderValidation.Common\OrderValidation.Common.csproj" />
   </ItemGroup>
 

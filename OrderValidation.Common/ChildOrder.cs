@@ -9,6 +9,7 @@ namespace OrderValidation.Common
     {
         private decimal _weight;
 
+        [Range(double.Epsilon, 1.0)]
         public decimal Weight
         {
             get => Math.Round(_weight, 2);

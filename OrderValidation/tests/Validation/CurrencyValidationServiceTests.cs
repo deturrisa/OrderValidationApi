@@ -40,7 +40,7 @@ namespace OrderValidation.Currency.Tests.Validation
             Assert.Equal(ValidationState.Success, result);
         }
         
-        //TODO: Test for symbols
+        //TODO: Test for symbols and full ISO currency format check
         
     }
 }
