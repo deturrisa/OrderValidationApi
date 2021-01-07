@@ -38,5 +38,7 @@ namespace OrderValidation.Currency.Validation.Tests
             Assert.True(result);
         }
         
+        //TODO: Test for symbols
+        
     }
 }

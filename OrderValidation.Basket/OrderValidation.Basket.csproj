@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+    <ProjectReference Include="..\OrderValidation.Common\OrderValidation.Common.csproj" />
   </ItemGroup>
 
 </Project>
