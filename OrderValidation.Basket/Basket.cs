@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
 namespace OrderValidation.Basket
 {
@@ -16,6 +17,8 @@ namespace OrderValidation.Basket
         public int CountChildOrders() => _childOrders.Count;
 
         public decimal SumOrderWeight() => _childOrders.Sum(x => x.Weight);
+
+        public List<ChildOrder> GetChildOrders() => _childOrders;
 
         //TODO See if can implement ICollection or IEnumerable
     }

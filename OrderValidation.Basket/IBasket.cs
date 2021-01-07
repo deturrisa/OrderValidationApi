@@ -9,5 +9,6 @@ namespace OrderValidation.Basket
     {
         int CountChildOrders();
         decimal SumOrderWeight();
+        List<ChildOrder> GetChildOrders();
     }
 }

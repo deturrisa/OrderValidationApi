@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using OrderValidation.Common;
 
 namespace OrderValidation.Currency.Validation
 {
@@ -12,9 +13,10 @@ namespace OrderValidation.Currency.Validation
             Currencies.HKD,
             Currencies.USD
         };
-        public bool IsSupportedCurrency(string currency)
+
+        public ValidationState ValidateCurrency(string currency)
         {
-            return _supportedCurrencies.Contains(currency);
+            return _supportedCurrencies.Contains(currency) ? ValidationState.Success : ValidationState.UnsupportedCurrency;
         }
     }
 }

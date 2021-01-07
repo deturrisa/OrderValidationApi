@@ -1,7 +1,9 @@
-﻿namespace OrderValidation.Currency.Validation
+﻿using OrderValidation.Common;
+
+namespace OrderValidation.Currency.Validation
 {
     public interface ICurrencyValidationService
     {
-        bool IsSupportedCurrency(string currency);
+        ValidationState ValidateCurrency(string currency);
     }
 }

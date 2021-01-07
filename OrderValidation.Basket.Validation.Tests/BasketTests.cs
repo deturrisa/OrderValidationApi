@@ -37,6 +37,19 @@ namespace OrderValidation.Basket.Tests
             //Assert
             Assert.Equal(expectedWeight, result);
         }
-        
+
+        [Theory, AutoData]
+        public void GetChildOrders_ReturnsChildOrders_WhenBasketHasChildOrders(List<ChildOrder> childOrders)
+        {
+            //Arrange
+            var sut = new Basket(childOrders);
+
+            //Act
+            var result = sut.GetChildOrders();
+
+            //Assert
+            Assert.Equal(childOrders, result);
+        }
+
     }
 }
