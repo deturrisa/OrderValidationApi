@@ -3,23 +3,41 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 
 namespace OrderValidation.Basket
 {
-    public class Basket : IBasket
+    public class Basket : IEnumerable<ChildOrder>
     {
-        private readonly List<ChildOrder> _childOrders;
-        public Basket(List<ChildOrder> childOrders)
-        {
-            _childOrders = childOrders;
-        }
-        public int CountChildOrders() => _childOrders.Count;
+        private List<ChildOrder> _childOrders = new List<ChildOrder>();
+        public int Count => _childOrders.Count;
 
         public decimal SumOrderWeight() => _childOrders.Sum(x => x.Weight);
 
         public List<ChildOrder> GetChildOrders() => _childOrders;
 
-        //TODO See if can implement ICollection or IEnumerable
+        public IEnumerator<ChildOrder> GetEnumerator()
+        {
+            return _childOrders.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+
+        public void Add(ChildOrder childOrder)
+        {
+            _childOrders.Add(childOrder);
+        }
+        
+        public void Add(List<ChildOrder> childOrders)
+        {
+            foreach (var childOrder in childOrders)
+            {
+                Add(childOrder);
+            }
+        }
+
+        public ChildOrder this[int index] => _childOrders[index];
     }
 }
