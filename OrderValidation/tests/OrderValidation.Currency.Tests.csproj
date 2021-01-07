@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\OrderValidation.Currency.Validation\OrderValidation.Currency.Validation.csproj" />
+    <ProjectReference Include="..\..\OrderValidation.Currency.Validation\OrderValidation.Currency.csproj" />
   </ItemGroup>
 
 </Project>

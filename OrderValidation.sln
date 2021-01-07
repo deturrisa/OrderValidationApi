@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderValidation.Currency.Validation.Tests", "OrderValidation\tests\OrderValidation.Currency.Validation.Tests.csproj", "{952543E6-F195-485A-9F64-C1831DEDC237}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderValidation.Currency.Tests", "OrderValidation\tests\OrderValidation.Currency.Tests.csproj", "{952543E6-F195-485A-9F64-C1831DEDC237}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{066A11CB-0199-4811-8FC9-BE4FEC4DCCC3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{4BDA0EC5-FDEB-429A-B0DE-8D8A8329DA9A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderValidation.Currency.Validation", "OrderValidation.Currency.Validation\OrderValidation.Currency.Validation.csproj", "{9BCCE7CD-D012-40E1-92EA-5A0031FF9933}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderValidation.Currency", "OrderValidation.Currency.Validation\OrderValidation.Currency.csproj", "{9BCCE7CD-D012-40E1-92EA-5A0031FF9933}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderValidation.Common", "OrderValidation.Common\OrderValidation.Common.csproj", "{44571FE1-7493-40AF-AAC7-EE687E190AB4}"
 EndProject

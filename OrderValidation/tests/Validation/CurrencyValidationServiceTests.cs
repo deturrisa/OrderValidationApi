@@ -1,7 +1,8 @@
 using AutoFixture.Xunit2;
+using OrderValidation.Currency.Validation;
 using Xunit;
 
-namespace OrderValidation.Currency.Validation.Tests
+namespace OrderValidation.Currency.Tests.Validation
 {
     public class CurrencyValidationServiceTests
     {
