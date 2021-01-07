@@ -11,6 +11,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{4BDA0EC5-FDE
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderValidation.Currency.Validation", "OrderValidation.Currency.Validation\OrderValidation.Currency.Validation.csproj", "{9BCCE7CD-D012-40E1-92EA-5A0031FF9933}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderValidation.Common", "OrderValidation.Common\OrderValidation.Common.csproj", "{44571FE1-7493-40AF-AAC7-EE687E190AB4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{9BCCE7CD-D012-40E1-92EA-5A0031FF9933}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9BCCE7CD-D012-40E1-92EA-5A0031FF9933}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9BCCE7CD-D012-40E1-92EA-5A0031FF9933}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44571FE1-7493-40AF-AAC7-EE687E190AB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44571FE1-7493-40AF-AAC7-EE687E190AB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44571FE1-7493-40AF-AAC7-EE687E190AB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44571FE1-7493-40AF-AAC7-EE687E190AB4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -32,6 +38,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{952543E6-F195-485A-9F64-C1831DEDC237} = {066A11CB-0199-4811-8FC9-BE4FEC4DCCC3}
 		{9BCCE7CD-D012-40E1-92EA-5A0031FF9933} = {4BDA0EC5-FDEB-429A-B0DE-8D8A8329DA9A}
+		{44571FE1-7493-40AF-AAC7-EE687E190AB4} = {4BDA0EC5-FDEB-429A-B0DE-8D8A8329DA9A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {90F768D4-65FA-4AF0-BB56-ED3E5F647F67}
