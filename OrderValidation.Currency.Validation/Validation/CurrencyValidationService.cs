@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using OrderValidation.Common;
 
 namespace OrderValidation.Currency.Validation
@@ -10,13 +11,18 @@ namespace OrderValidation.Currency.Validation
     {
         private readonly string[] _supportedCurrencies =
         {
-            Currencies.HKD,
-            Currencies.USD
+            SupportedCurrencies.HKD,
+            SupportedCurrencies.USD
         };
 
         public ValidationState ValidateCurrency(string currency)
         {
-            return _supportedCurrencies.Contains(currency) ? ValidationState.Success : ValidationState.UnsupportedCurrency;
+            if (!Regex.Match(currency, @"[A-Z]{3}").Success)
+            {
+                return ValidationState.InvalidCurrencyFormat;
+            }
+
+            return !_supportedCurrencies.Contains(currency) ? ValidationState.UnsupportedCurrency : ValidationState.Success;
         }
     }
 }

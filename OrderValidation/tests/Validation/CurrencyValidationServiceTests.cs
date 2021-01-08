@@ -1,3 +1,5 @@
+using System;
+using System.Linq;
 using AutoFixture.Xunit2;
 using OrderValidation.Common;
 using OrderValidation.Currency.Validation;
@@ -9,16 +11,29 @@ namespace OrderValidation.Currency.Tests.Validation
     public class CurrencyValidationServiceTests
     {
         [Theory, AutoData]
-        public void ValidateCurrency_ReturnsUnsupportedCurrencyState_WhenCurrencyIsNotSupported(string currency, CurrencyValidationService sut)
+        public void ValidateCurrency_ReturnsInvalidCurrencyFormatState_WhenCurrencyIsInvalidFormat(string currency, CurrencyValidationService sut)
         {
             //Arrange
             //Act
             var result = sut.ValidateCurrency(currency);
             
             //Assert
+            Assert.Equal(ValidationState.InvalidCurrencyFormat, result);
+        }
+
+        [Theory, AutoData]
+        public void ValidateCurrency_ReturnsUnsupportedCurrencyState_WhenCurrencyFormatIsValidAnd_CurrencyIsUnsupported(CurrencyValidationService sut)
+        {
+            //Arrange
+            var unsupportedCurrency = "ZZZ";
+            //TODO: implement invalid currency helper
+            //Act
+            var result = sut.ValidateCurrency(unsupportedCurrency);
+
+            //Assert
             Assert.Equal(ValidationState.UnsupportedCurrency, result);
         }
-        
+
         [Theory, AutoData]
         public void ValidateCurrency_ReturnsSuccessState_WhenCurrencyIsSupported_WithHKD(CurrencyValidationService sut)
         {
@@ -40,8 +55,14 @@ namespace OrderValidation.Currency.Tests.Validation
             //Assert
             Assert.Equal(ValidationState.Success, result);
         }
-        
-        //TODO: Test for symbols and full ISO currency format check
+        private string UnsupportedCurrencyHelper()
+        {
+            return Guid.NewGuid().ToByteArray()
+                .Select(b => (byte) (((b % 16) < 10 ? 0xA : b) |
+                                     (((b >> 4) < 10 ? 0xA : (b >> 4)) << 4)))
+                .ToString()
+                ?.Substring(4).ToUpper();
+        }
         
     }
 }
