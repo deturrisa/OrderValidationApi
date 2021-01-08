@@ -5,6 +5,7 @@ using Xunit;
 
 namespace OrderValidation.Currency.Tests.Validation
 {
+    [Trait("Category", "Unit")]
     public class CurrencyValidationServiceTests
     {
         [Theory, AutoData]

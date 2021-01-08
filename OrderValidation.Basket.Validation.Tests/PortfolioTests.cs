@@ -2,15 +2,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoFixture.Xunit2;
+using OrderValidation.ChildOrder;
 using OrderValidation.Common;
 using Xunit;
 
 namespace OrderValidation.Basket.Tests
 {
+    [Trait("Category", "Unit")]
     public class PortfolioTests
     {
         [Fact]
-        public void Counts_ReturnsEmptyBasket_WhenBasketHasNoStocks()
+        public void Counts_ReturnsEmptyPortfolio_WhenPortfolioHasNoStocks()
         {
             //Arrange
             var sut = new Portfolio();
@@ -24,12 +26,12 @@ namespace OrderValidation.Basket.Tests
         }
 
         [Theory, AutoData]
-        public void SumOrderWeight_ReturnsSumOfOrders_WhenBasketHasOrders(List<Stock> Stocks)
+        public void SumOrderWeight_ReturnsSumOfOrders_WhenPortfolioHasOrders(List<Stock> stocks)
         {
             //Arrange
-            var sut = new Portfolio { Stocks };
+            var sut = new Portfolio { stocks };
             
-            var expectedWeight = Stocks.Sum(x => x.Weight);
+            var expectedWeight = stocks.Sum(x => x.Weight);
             
             //Act
             var result = sut.SumOrderWeight();
@@ -39,16 +41,16 @@ namespace OrderValidation.Basket.Tests
         }
 
         [Theory, AutoData]
-        public void GetStocks_ReturnsStocks_WhenBasketHasStocks(List<Stock> Stocks)
+        public void GetStocks_ReturnsStocks_WhenPortfolioHasStocks(List<Stock> stocks)
         {
             //Arrange
-            var sut = new Portfolio() {Stocks};
+            var sut = new Portfolio() { stocks };
 
             //Act
             var result = sut.GetStocks();
 
             //Assert
-            Assert.Equal(Stocks, result);
+            Assert.Equal(stocks, result);
         }
 
     }

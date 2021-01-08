@@ -7,6 +7,6 @@ namespace OrderValidation.Basket.Validation
 {
     public interface IPortfolioValidationService
     {
-       ValidationState ValidateBasket(Portfolio portfolio);
+       ValidationState ValidatePortfolio(Portfolio portfolio);
     }
 }

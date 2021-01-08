@@ -1,4 +1,5 @@
-﻿using OrderValidation.Common;
+﻿using OrderValidation.ChildOrder;
+using OrderValidation.Common;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -34,7 +35,7 @@ namespace OrderValidation.Basket
         {
             foreach (var stock in stocks)
             {
-                Add(stocks);
+                Add(stock);
             }
         }
 

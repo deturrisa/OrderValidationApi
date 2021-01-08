@@ -2,15 +2,16 @@ using AutoFixture.Xunit2;
 using System;
 using Xunit;
 
-namespace OrderValidation.Stock.Tests
+namespace OrderValidation.ChildOrder.Tests
 {
-    public class StockValidationTests
+    [Trait("Category", "Unit")]
+    public class StockTests
     {
         [Theory, AutoData]
         public void GenerateOrderId_ReturnsIncrementedIndexBy1AndCurrentDate_WhenOneStockInstantiated()
         {
             //Arrange
-
+            var stock = new Stock();
 
 
         }

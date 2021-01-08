@@ -15,7 +15,7 @@ namespace OrderValidation.Basket.Validation
             _logger = logger;
         }
         
-        public ValidationState ValidateBasket(Portfolio portfolio)
+        public ValidationState ValidatePortfolio(Portfolio portfolio)
         {
             _logger.LogTrace("Attempting to validate portfolio");
             

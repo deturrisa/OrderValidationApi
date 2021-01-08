@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace OrderValidation.Common
+namespace OrderValidation.ChildOrder
 {
     public class Stock
     {

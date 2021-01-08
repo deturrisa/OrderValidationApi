@@ -10,23 +10,24 @@ using OrderValidation.Basket.Validation;
 using OrderValidation.Common;
 using Xunit;
 using OrderValidation.Tests.Common.Extensions;
-using AutoFixture.AutoMoq;
+using OrderValidation.ChildOrder;
 
 namespace OrderValidation.Basket.Tests.Validation
 {
+    [Trait("Category", "Unit")]
     public class PortfolioValidationTests
     {
         [Fact]
-        public void ValidateBasket_ReturnsEmptyBasketState_WhenNoStocksInBasket()
+        public void ValidatePortfolio_ReturnsEmptyPortfolioState_WhenNoStocksInPortfolio()
         {
             //Arrange
-            var basket = new Portfolio() {new List<Stock>()};
+            var portfolio = new Portfolio() {new List<Stock>()};
             var mockLogger = new Mock<ILogger<PortfolioValidationService>>();
 
             var sut = new PortfolioValidationService(mockLogger.Object);
 
             //Act
-            var result = sut.ValidateBasket(basket);
+            var result = sut.ValidatePortfolio(portfolio);
 
             //Assert
             Assert.Equal(ValidationState.EmptyPortfolio, result);
@@ -35,17 +36,17 @@ namespace OrderValidation.Basket.Tests.Validation
 
         }
         [Theory, AutoData]
-        public void ValidateBasket_ReturnsNegativeStockWeightState_WhenSingleStockWeight_HasNegativeWeight(Stock Stock)
+        public void ValidatePortfolio_ReturnsNegativeStockWeightState_WhenSingleStockWeight_HasNegativeWeight(Stock stock)
         {
             //Arrange
-            var basket = new Portfolio(){ Stock };
+            var portfolio = new Portfolio(){ stock };
             var mockLogger = new Mock<ILogger<PortfolioValidationService>>();
-            basket[0].Weight *= -1;
+            portfolio[0].Weight *= -1;
             
             var sut = new PortfolioValidationService(mockLogger.Object);
 
             //Act
-            var result = sut.ValidateBasket(basket);
+            var result = sut.ValidatePortfolio(portfolio);
             
             //Assert
             Assert.Equal(ValidationState.NegativeStockWeight, result);
@@ -54,15 +55,15 @@ namespace OrderValidation.Basket.Tests.Validation
         }
 
         [Theory, AutoData]
-        public void ValidateBasket_ReturnsInvalidWeightState_WhenSumOfSingleStockWeight_IsNotEqualTo1(Stock Stock)
+        public void ValidatePortfolio_ReturnsInvalidWeightState_WhenSumOfSingleStockWeight_IsNotEqualTo1(Stock stock)
         {
             //Arrange
-            var basket = new Portfolio() {Stock};
+            var portfolio = new Portfolio() { stock };
             var mockLogger = new Mock<ILogger<PortfolioValidationService>>();
             var sut = new PortfolioValidationService(mockLogger.Object);
 
             //Act
-            var result = sut.ValidateBasket(basket);
+            var result = sut.ValidatePortfolio(portfolio);
             
             //Assert
             Assert.Equal(ValidationState.InvalidWeightState, result);
@@ -71,16 +72,16 @@ namespace OrderValidation.Basket.Tests.Validation
         }
 
         [Fact]
-        public void ValidateBasket_ReturnsSuccessState_WhenSumOfSingleStockWeight_IsEqualTo1()
+        public void ValidatePortfolio_ReturnsSuccessState_WhenSumOfSingleStockWeight_IsEqualTo1()
         {
             //Arrange
-            var Stock = new Stock() {Weight = 1.0m};
-            var basket = new Portfolio() { Stock };
+            var stock = new Stock() {Weight = 1.0m};
+            var portfolio = new Portfolio() { stock };
             var mockLogger = new Mock<ILogger<PortfolioValidationService>>();
             var sut = new PortfolioValidationService(mockLogger.Object);
 
             //Act
-            var result = sut.ValidateBasket(basket);
+            var result = sut.ValidatePortfolio(portfolio);
 
             //Assert
             Assert.Equal(ValidationState.Success, result);
@@ -89,17 +90,17 @@ namespace OrderValidation.Basket.Tests.Validation
         } 
         
         [Theory, AutoData]
-        public void ValidateBasket_ReturnsNegativeStockWeight_WhenStockWeight_HasNegativeWeight(List<Stock> stocks)
+        public void ValidatePortfolio_ReturnsNegativeStockWeight_WhenStockWeight_HasNegativeWeight(List<Stock> stocks)
         {
             //Arrange
-            var basket = new Portfolio(){stocks};
+            var portfolio = new Portfolio(){stocks};
             var mockLogger = new Mock<ILogger<PortfolioValidationService>>();
-            basket[0].Weight *= -1;
+            portfolio[0].Weight *= -1;
             
             var sut = new PortfolioValidationService(mockLogger.Object);
 
             //Act
-            var result = sut.ValidateBasket(basket);
+            var result = sut.ValidatePortfolio(portfolio);
             
             //Assert
             Assert.Equal(ValidationState.NegativeStockWeight, result);
@@ -109,15 +110,15 @@ namespace OrderValidation.Basket.Tests.Validation
         }
 
         [Theory, AutoData]
-        public void ValidateBasket_ReturnsInvalidWeightState_WhenSumOfStockWeight_IsNotEqualTo1(List<Stock> stocks)
+        public void ValidatePortfolio_ReturnsInvalidWeightState_WhenSumOfStockWeight_IsNotEqualTo1(List<Stock> stocks)
         {
             //Arrange
-            var basket = new Portfolio() {stocks};
+            var portfolio = new Portfolio() {stocks};
             var mockLogger = new Mock<ILogger<PortfolioValidationService>>();
             var sut = new PortfolioValidationService(mockLogger.Object);
 
             //Act
-            var result = sut.ValidateBasket(basket);
+            var result = sut.ValidatePortfolio(portfolio);
             
             //Assert
             Assert.Equal(ValidationState.InvalidWeightState, result);
@@ -127,10 +128,10 @@ namespace OrderValidation.Basket.Tests.Validation
         }
 
         [Fact]
-        public void ValidateBasket_ReturnsSuccessState_WhenSumOfStockWeight_IsEqualTo1()
+        public void ValidatePortfolio_ReturnsSuccessState_WhenSumOfStockWeight_IsEqualTo1()
         {
             //Arrange
-            var basket = new Portfolio() { new List<Stock>()
+            var portfolio = new Portfolio() { new List<Stock>()
             {
                 new Stock(){Weight = 0.2m },
                 new Stock(){Weight = 0.2m },
@@ -144,7 +145,7 @@ namespace OrderValidation.Basket.Tests.Validation
             var sut = new PortfolioValidationService(mockLogger.Object);
 
             //Act
-            var result = sut.ValidateBasket(basket);
+            var result = sut.ValidatePortfolio(portfolio);
 
             //Assert
             Assert.Equal(ValidationState.Success, result);
