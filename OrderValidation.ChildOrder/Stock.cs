@@ -7,6 +7,7 @@ namespace OrderValidation.ChildOrder
 {
     public class Stock
     {
+
         private decimal _weight;
 
         [Range(double.Epsilon, 1.0)]
