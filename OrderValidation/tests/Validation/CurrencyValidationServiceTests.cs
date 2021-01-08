@@ -1,6 +1,8 @@
 using System;
 using System.Linq;
 using AutoFixture.Xunit2;
+using Microsoft.Extensions.Logging;
+using Moq;
 using OrderValidation.Common;
 using OrderValidation.Currency.Validation;
 using Xunit;
@@ -11,20 +13,23 @@ namespace OrderValidation.Currency.Tests.Validation
     public class CurrencyValidationServiceTests
     {
         [Theory, AutoData]
-        public void ValidateCurrency_ReturnsInvalidCurrencyFormatState_WhenCurrencyIsInvalidFormat(string currency, CurrencyValidationService sut)
+        public void ValidateCurrency_ReturnsInvalidCurrencyFormatState_WhenCurrencyIsInvalidFormat(string currency, Mock<ILogger<CurrencyValidationService>> loggerMock)
         {
             //Arrange
+            var sut = new CurrencyValidationService(loggerMock.Object);
             //Act
             var result = sut.ValidateCurrency(currency);
             
             //Assert
             Assert.Equal(ValidationState.InvalidCurrencyFormat, result);
+            
         }
 
         [Theory, AutoData]
-        public void ValidateCurrency_ReturnsUnsupportedCurrencyState_WhenCurrencyFormatIsValidAnd_CurrencyIsUnsupported(CurrencyValidationService sut)
+        public void ValidateCurrency_ReturnsUnsupportedCurrencyState_WhenCurrencyFormatIsValidAnd_CurrencyIsUnsupported(Mock<ILogger<CurrencyValidationService>> loggerMock)
         {
             //Arrange
+            var sut = new CurrencyValidationService(loggerMock.Object);
             var unsupportedCurrency = "ZZZ";
             //TODO: implement invalid currency helper
             //Act
@@ -35,10 +40,10 @@ namespace OrderValidation.Currency.Tests.Validation
         }
 
         [Theory, AutoData]
-        public void ValidateCurrency_ReturnsSuccessState_WhenCurrencyIsSupported_WithHKD(CurrencyValidationService sut)
+        public void ValidateCurrency_ReturnsSuccessState_WhenCurrencyIsSupported_WithHKD(Mock<ILogger<CurrencyValidationService>> loggerMock)
         {
             //Arrange
-            //Act
+            var sut = new CurrencyValidationService(loggerMock.Object);
             var result = sut.ValidateCurrency("HKD");
 
             //Assert
@@ -46,9 +51,11 @@ namespace OrderValidation.Currency.Tests.Validation
         }
         
         [Theory, AutoData]
-        public void ValidateCurrency_ReturnsSuccessState_WhenCurrencyIsSupported_WithUSD(CurrencyValidationService sut)
+        public void ValidateCurrency_ReturnsSuccessState_WhenCurrencyIsSupported_WithUSD(Mock<ILogger<CurrencyValidationService>> loggerMock)
         {
             //Arrange
+            var sut = new CurrencyValidationService(loggerMock.Object);
+            
             //Act
             var result = sut.ValidateCurrency("USD");
 

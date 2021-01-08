@@ -9,7 +9,6 @@ using Moq;
 using OrderValidation.Basket.Validation;
 using OrderValidation.Common;
 using Xunit;
-using OrderValidation.Tests.Common.Extensions;
 using OrderValidation.ChildOrder;
 
 namespace OrderValidation.Basket.Tests.Validation
@@ -31,8 +30,6 @@ namespace OrderValidation.Basket.Tests.Validation
 
             //Assert
             Assert.Equal(ValidationState.EmptyPortfolio, result);
-            mockLogger.VerifyTraceWasCalled();
-            mockLogger.VerifyWarningWasCalled();
 
         }
         [Theory, AutoData]
@@ -50,8 +47,6 @@ namespace OrderValidation.Basket.Tests.Validation
             
             //Assert
             Assert.Equal(ValidationState.NegativeStockWeight, result);
-            mockLogger.VerifyTraceWasCalled();
-            mockLogger.VerifyWarningWasCalled();
         }
 
         [Theory, AutoData]
@@ -67,8 +62,6 @@ namespace OrderValidation.Basket.Tests.Validation
             
             //Assert
             Assert.Equal(ValidationState.InvalidWeightState, result);
-            mockLogger.VerifyTraceWasCalled();
-            mockLogger.VerifyWarningWasCalled();
         }
 
         [Fact]
@@ -85,7 +78,6 @@ namespace OrderValidation.Basket.Tests.Validation
 
             //Assert
             Assert.Equal(ValidationState.Success, result);
-            mockLogger.VerifyTraceWasCalled();
             //TODO: FIXTURE FOR BASKET CLASS
         } 
         
@@ -104,8 +96,6 @@ namespace OrderValidation.Basket.Tests.Validation
             
             //Assert
             Assert.Equal(ValidationState.NegativeStockWeight, result);
-            mockLogger.VerifyTraceWasCalled();
-            mockLogger.VerifyWarningWasCalled();
             //TODO: FIXTURE FOR BASKET CLASS
         }
 
@@ -122,8 +112,6 @@ namespace OrderValidation.Basket.Tests.Validation
             
             //Assert
             Assert.Equal(ValidationState.InvalidWeightState, result);
-            mockLogger.VerifyTraceWasCalled();
-            mockLogger.VerifyWarningWasCalled();
             //TODO: FIXTURE FOR BASKET CLASS
         }
 
@@ -149,7 +137,6 @@ namespace OrderValidation.Basket.Tests.Validation
 
             //Assert
             Assert.Equal(ValidationState.Success, result);
-            mockLogger.VerifyTraceWasCalled();
             //TODO: FIXTURE FOR BASKET CLASS
         }
 

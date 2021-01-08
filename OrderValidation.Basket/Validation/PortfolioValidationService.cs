@@ -31,6 +31,8 @@ namespace OrderValidation.Basket.Validation
 
             foreach (var stock in stocks)
             {
+                //stock validator ?
+                //Possible implementation of IClientProviderFactory
                 if (stock.Weight < 0)
                 {
                     _logger.LogWarning("Weight properties cannot be < 0");
