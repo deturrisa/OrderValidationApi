@@ -5,7 +5,7 @@ using System.Text;
 
 namespace OrderValidation.Common
 {
-    public class ChildOrder
+    public class Stock
     {
         private decimal _weight;
 

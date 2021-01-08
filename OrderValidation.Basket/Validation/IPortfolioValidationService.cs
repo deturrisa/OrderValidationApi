@@ -5,8 +5,8 @@ using OrderValidation.Common;
 
 namespace OrderValidation.Basket.Validation
 {
-    public interface IBasketValidationService
+    public interface IPortfolioValidationService
     {
-       ValidationState ValidateBasket(Basket basket);
+       ValidationState ValidateBasket(Portfolio portfolio);
     }
 }

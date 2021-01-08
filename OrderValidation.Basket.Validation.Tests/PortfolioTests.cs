@@ -7,13 +7,13 @@ using Xunit;
 
 namespace OrderValidation.Basket.Tests
 {
-    public class BasketTests
+    public class PortfolioTests
     {
         [Fact]
-        public void Counts_ReturnsEmptyBasket_WhenBasketHasNoChildOrders()
+        public void Counts_ReturnsEmptyBasket_WhenBasketHasNoStocks()
         {
             //Arrange
-            var sut = new Basket();
+            var sut = new Portfolio();
             
             //Act
             var result = sut.Count();
@@ -24,12 +24,12 @@ namespace OrderValidation.Basket.Tests
         }
 
         [Theory, AutoData]
-        public void SumOrderWeight_ReturnsSumOfOrders_WhenBasketHasOrders(List<ChildOrder> childOrders)
+        public void SumOrderWeight_ReturnsSumOfOrders_WhenBasketHasOrders(List<Stock> Stocks)
         {
             //Arrange
-            var sut = new Basket { childOrders };
+            var sut = new Portfolio { Stocks };
             
-            var expectedWeight = childOrders.Sum(x => x.Weight);
+            var expectedWeight = Stocks.Sum(x => x.Weight);
             
             //Act
             var result = sut.SumOrderWeight();
@@ -39,16 +39,16 @@ namespace OrderValidation.Basket.Tests
         }
 
         [Theory, AutoData]
-        public void GetChildOrders_ReturnsChildOrders_WhenBasketHasChildOrders(List<ChildOrder> childOrders)
+        public void GetStocks_ReturnsStocks_WhenBasketHasStocks(List<Stock> Stocks)
         {
             //Arrange
-            var sut = new Basket() {childOrders};
+            var sut = new Portfolio() {Stocks};
 
             //Act
-            var result = sut.GetChildOrders();
+            var result = sut.GetStocks();
 
             //Assert
-            Assert.Equal(childOrders, result);
+            Assert.Equal(Stocks, result);
         }
 
     }
