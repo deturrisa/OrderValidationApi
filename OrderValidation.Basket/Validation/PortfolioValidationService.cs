@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Extensions.Logging;
+using OrderValidation.Client;
+using OrderValidation.Client.Clients;
+using OrderValidation.Client.Global;
 using OrderValidation.Common;
 
 namespace OrderValidation.Basket.Validation
@@ -10,45 +13,99 @@ namespace OrderValidation.Basket.Validation
     public class PortfolioValidationService : IPortfolioValidationService
     {
         private readonly ILogger<PortfolioValidationService> _logger;
-        public PortfolioValidationService(ILogger<PortfolioValidationService> logger)
+        private readonly IClientValidationFactory _clientValidationFactory;
+        private readonly IGlobalValidationService _globalValidationService;
+
+        public PortfolioValidationService(ILogger<PortfolioValidationService> logger, IClientValidationFactory clientValidationFactory, IGlobalValidationService globalValidationService)
         {
             _logger = logger;
+            _clientValidationFactory = clientValidationFactory;
+            _globalValidationService = globalValidationService;
         }
-        
-        public ValidationState ValidatePortfolio(Portfolio portfolio)
+
+        public ValidationState ValidatePortfolio(Portfolio portfolio, string clientId)
         {
             _logger.LogTrace("Attempting to validate portfolio");
-            
-            var stocks = portfolio.GetStocks();
 
-            if (stocks.Count == 0)
+            IClientValidation clientValidation;
+
+            try
             {
-                _logger.LogWarning("Portfolio cannot be empty");
-                return ValidationState.EmptyPortfolio;
+                clientValidation = _clientValidationFactory.GetClientValidation(clientId);
+            }
+            catch (ArgumentOutOfRangeException e)
+            {
+                _logger.LogWarning($"Client: {clientId} does not exist. Message = '{e.Message}'");
+
+                return ValidationState.UnsupportedClient;
+            }
+
+            _logger.LogTrace("Checking for empty basket");
+            
+            var validatePortfolioHasStockResponse = _globalValidationService.ValidatePortfolioHasStock(portfolio);
+
+            if (validatePortfolioHasStockResponse != ValidationState.Success)
+            {
+                _logger.LogWarning("Basket cannot be empty");
+                
+                return validatePortfolioHasStockResponse;
             }
             
-            decimal total = 0;
+            decimal weightTotal = 0;
+            decimal notionalAmountTotal = 0;
 
-            foreach (var stock in stocks)
+            foreach (var stock in portfolio.GetStocks())
             {
-                //stock validator ?
-                //Possible implementation of IClientProviderFactory
-                if (stock.Weight < 0)
+                _logger.LogTrace($"Validating stock with global rules, OrderId ='{stock.OrderId}'");
+                
+                var globalValidateStockResponse = _globalValidationService.ValidateStock(stock);
+
+                if (globalValidateStockResponse != ValidationState.Success)
                 {
-                    _logger.LogWarning("Weight properties cannot be < 0");
-                    return ValidationState.NegativeStockWeight;
+                    _logger.LogWarning($"Failed validating stock with global rules, OrderId ='{stock.OrderId}");
+                    
+                    return globalValidateStockResponse;
                 }
 
-                total += stock.Weight;
-            }
+                _logger.LogTrace("Stock with OrderId has passed global validation");
 
-            if (total != 1)
+                var clientValidateStockResponse = clientValidation.ValidateStock(stock);
+
+                if (clientValidateStockResponse != ValidationState.Success)
+                {
+                    _logger.LogWarning($"Failed validating stock with {clientValidation.GetType().Name} rules, OrderId ='{stock.OrderId}");
+                    
+                    return clientValidateStockResponse;
+                }
+
+                weightTotal += stock.Weight;
+                
+                notionalAmountTotal += stock.NotionalAmount;
+                
+            }
+            
+            _logger.LogTrace("Stock validation passed... validating portfolio weight");
+
+            var totalPortfolioWeightResponse = _globalValidationService.ValidateTotalPortfolioWeight(weightTotal);
+
+            if (totalPortfolioWeightResponse != ValidationState.Success)
             {
-                _logger.LogWarning("Total weight of orders must be equal to 1");
+                _logger.LogWarning("Total weight does not meet weight total value: 1");
                 return ValidationState.InvalidWeightState;
             }
 
+            var totalPortfolioNotionalAmountResponse = clientValidation.ValidateTotalPortfolioNotionalAmount(notionalAmountTotal);
+
+            if (totalPortfolioNotionalAmountResponse != ValidationState.Success)
+            {
+                _logger.LogWarning(
+                    $"Failed validating stock with {clientValidation.GetType().Name} total notional amount rules");
+                
+                return totalPortfolioNotionalAmountResponse;
+            }
+            
             _logger.LogTrace("Portfolio validation success");
+            
             return ValidationState.Success;
         }
 

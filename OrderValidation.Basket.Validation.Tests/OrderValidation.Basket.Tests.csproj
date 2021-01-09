@@ -25,6 +25,7 @@
   <ItemGroup>
     <ProjectReference Include="..\OrderValidation.Basket\OrderValidation.Basket.csproj" />
     <ProjectReference Include="..\OrderValidation.ChildOrder\OrderValidation.ChildOrder.csproj" />
+    <ProjectReference Include="..\OrderValidation.Client\OrderValidation.Client.csproj" />
   </ItemGroup>
 
 </Project>

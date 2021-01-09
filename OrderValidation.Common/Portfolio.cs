@@ -1,11 +1,8 @@
-﻿using OrderValidation.ChildOrder;
-using OrderValidation.Common;
-using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace OrderValidation.Basket
+namespace OrderValidation.Common
 {
     public class Portfolio : IEnumerable<Stock>
     {
