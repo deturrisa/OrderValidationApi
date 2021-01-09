@@ -21,6 +21,6 @@ namespace OrderValidation.Common
             set => _notionalAmount = value;
         }
         public string OrderId { get; set; }
-        
+        public string Currency { get; set; }
     }
 }

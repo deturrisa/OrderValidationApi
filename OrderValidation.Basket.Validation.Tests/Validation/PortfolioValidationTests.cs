@@ -81,7 +81,8 @@ namespace OrderValidation.Basket.Tests.Validation
             
             var validationState = It.Is<ValidationState>(v => v == ValidationState.InvalidCurrencyFormat
                                                               || v == ValidationState.InvalidOrderId
-                                                              || v == ValidationState.NegativeStockWeight);
+                                                              || v == ValidationState.NegativeStockWeight
+                                                              || v == ValidationState.NegativeNotionalWeight);
 
             mockClientValidationFactory.Setup(x => x.GetClientValidation(It.IsAny<string>()))
                 .Returns(It.IsAny<IClientValidation>());
@@ -255,9 +256,6 @@ namespace OrderValidation.Basket.Tests.Validation
             var mockClientValidationFactory = new Mock<IClientValidationFactory>(MockBehavior.Strict);
 
             var mockClientValidation = new Mock<IClientValidation>(MockBehavior.Strict);
-
-            var validationState = It.Is<ValidationState>(v => v == ValidationState.MinimumPortfolioNotionalAmountNotMet
-                                                              || v == ValidationState.MaximumPortfolioNotionalAmountNotMet);
 
             mockClientValidationFactory.Setup(x => x.GetClientValidation(It.IsAny<string>()))
                 .Returns(mockClientValidation.Object);

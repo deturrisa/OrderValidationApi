@@ -19,6 +19,7 @@ namespace OrderValidation.Common
         UnsupportedDestination,
         MinimumStockNotionalAmountNotMet,
         MinimumPortfolioNotionalAmountNotMet,
-        MaximumPortfolioNotionalAmountNotMet
+        MaximumPortfolioNotionalAmountNotMet,
+        NegativeNotionalWeight
     }
 }

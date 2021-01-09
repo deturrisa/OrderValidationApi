@@ -17,7 +17,6 @@ namespace OrderValidation.Currency.Validation
             _logger = logger;
         }
 
-
         private readonly string[] _supportedCurrencies =
         {
             SupportedCurrencies.HKD,
