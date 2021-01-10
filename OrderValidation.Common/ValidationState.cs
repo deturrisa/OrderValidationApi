@@ -16,10 +16,10 @@ namespace OrderValidation.Common
         UnsupportedClient = 7,
         InvalidOrderId = 8,
         UnsupportedType = 9,
-        UnsupportedDestination,
-        MinimumStockNotionalAmountNotMet,
-        MinimumPortfolioNotionalAmountNotMet,
-        MaximumPortfolioNotionalAmountNotMet,
-        NegativeNotionalWeight
+        UnsupportedDestination=10,
+        MinimumStockNotionalAmountNotMet=11,
+        MinimumPortfolioNotionalAmountNotMet=12,
+        MaximumPortfolioNotionalAmountNotMet=14,
+        NegativeNotionalWeight=15
     }
 }
