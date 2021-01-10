@@ -1,5 +1,6 @@
 ﻿using System;
 using OrderValidation.Client.Clients;
+using OrderValidation.Client.Clients.Interfaces;
 
 namespace OrderValidation.Client
 {

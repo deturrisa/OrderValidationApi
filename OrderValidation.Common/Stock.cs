@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using OrderValidation.Common.Type;
 
 namespace OrderValidation.Common
 {
@@ -22,5 +23,8 @@ namespace OrderValidation.Common
         }
         public string OrderId { get; set; }
         public string Currency { get; set; }
+        public OrderType OrderType { get; set; }
+        public string Destination { get; set; }
+        public string ClientId { get; set; }
     }
 }

@@ -10,7 +10,7 @@ namespace OrderValidation.Currency.Validation
 {
     public class CurrencyValidationService : ICurrencyValidationService
     {
-        private ILogger<CurrencyValidationService> _logger;
+        private readonly ILogger<CurrencyValidationService> _logger;
 
         public CurrencyValidationService(ILogger<CurrencyValidationService> logger)
         {

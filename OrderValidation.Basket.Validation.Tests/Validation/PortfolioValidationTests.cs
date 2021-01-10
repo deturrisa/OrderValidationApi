@@ -7,7 +7,7 @@ using OrderValidation.Basket.Validation;
 using OrderValidation.Common;
 using Xunit;
 using OrderValidation.Client;
-using OrderValidation.Client.Clients;
+using OrderValidation.Client.Clients.Interfaces;
 using OrderValidation.Client.Global;
 
 namespace OrderValidation.Basket.Tests.Validation
@@ -226,7 +226,7 @@ namespace OrderValidation.Basket.Tests.Validation
             mockGlobalValidationService.Setup(x => x.ValidateTotalPortfolioWeight(It.IsAny<decimal>()))
                 .Returns(ValidationState.Success);
 
-            mockClientValidation.Setup(x => x.ValidateTotalPortfolioNotionalAmount(It.IsAny<decimal>()))
+            mockClientValidation.Setup(x => x.ValidatePortfolioNotionalAmount(It.IsAny<decimal>()))
                 .Returns(validationState);
 
             var sut = new PortfolioValidationService(mockLogger.Object, mockClientValidationFactory.Object, mockGlobalValidationService.Object);
@@ -240,7 +240,7 @@ namespace OrderValidation.Basket.Tests.Validation
             mockGlobalValidationService.Verify(x => x.ValidatePortfolioHasStock(portfolio));
             mockGlobalValidationService.Verify(x => x.ValidateStock(It.IsAny<Stock>()));
             mockClientValidation.Verify(x => x.ValidateStock(It.IsAny<Stock>()));
-            mockClientValidation.Verify(x => x.ValidateTotalPortfolioNotionalAmount(It.IsAny<decimal>()));
+            mockClientValidation.Verify(x => x.ValidatePortfolioNotionalAmount(It.IsAny<decimal>()));
         }
 
         [Theory,AutoData]
@@ -272,7 +272,7 @@ namespace OrderValidation.Basket.Tests.Validation
             mockGlobalValidationService.Setup(x => x.ValidateTotalPortfolioWeight(It.IsAny<decimal>()))
                 .Returns(ValidationState.Success);
 
-            mockClientValidation.Setup(x => x.ValidateTotalPortfolioNotionalAmount(It.IsAny<decimal>()))
+            mockClientValidation.Setup(x => x.ValidatePortfolioNotionalAmount(It.IsAny<decimal>()))
                 .Returns(ValidationState.Success);
 
             var sut = new PortfolioValidationService(mockLogger.Object, mockClientValidationFactory.Object, mockGlobalValidationService.Object);
@@ -286,7 +286,7 @@ namespace OrderValidation.Basket.Tests.Validation
             mockGlobalValidationService.Verify(x => x.ValidatePortfolioHasStock(portfolio));
             mockGlobalValidationService.Verify(x => x.ValidateStock(It.IsAny<Stock>()));
             mockClientValidation.Verify(x => x.ValidateStock(It.IsAny<Stock>()));
-            mockClientValidation.Verify(x => x.ValidateTotalPortfolioNotionalAmount(It.IsAny<decimal>()));
+            mockClientValidation.Verify(x => x.ValidatePortfolioNotionalAmount(It.IsAny<decimal>()));
         }
     }
 }

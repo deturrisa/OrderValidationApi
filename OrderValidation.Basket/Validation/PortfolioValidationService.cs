@@ -95,7 +95,7 @@ namespace OrderValidation.Basket.Validation
                 return totalPortfolioWeightResponse;
             }
 
-            var totalPortfolioNotionalAmountResponse = clientValidation.ValidateTotalPortfolioNotionalAmount(notionalAmountTotal);
+            var totalPortfolioNotionalAmountResponse = clientValidation.ValidatePortfolioNotionalAmount(notionalAmountTotal);
 
             if (totalPortfolioNotionalAmountResponse != ValidationState.Success)
             {
