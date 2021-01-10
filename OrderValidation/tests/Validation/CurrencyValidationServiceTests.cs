@@ -31,7 +31,7 @@ namespace OrderValidation.Currency.Tests.Validation
             //Arrange
             var sut = new CurrencyValidationService(loggerMock.Object);
             var unsupportedCurrency = "ZZZ";
-            //TODO: implement invalid currency helper
+            
             //Act
             var result = sut.ValidateCurrency(unsupportedCurrency);
 
