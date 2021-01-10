@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.Extensions.Logging;
 using OrderValidation.Client;
 using OrderValidation.Client.Clients;
+using OrderValidation.Client.Clients.Interfaces;
 using OrderValidation.Client.Global;
 using OrderValidation.Common;
 
@@ -91,7 +92,7 @@ namespace OrderValidation.Basket.Validation
             if (totalPortfolioWeightResponse != ValidationState.Success)
             {
                 _logger.LogWarning("Total weight does not meet weight total value: 1");
-                return ValidationState.InvalidWeightState;
+                return totalPortfolioWeightResponse;
             }
 
             var totalPortfolioNotionalAmountResponse = clientValidation.ValidateTotalPortfolioNotionalAmount(notionalAmountTotal);

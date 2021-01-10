@@ -69,7 +69,7 @@ namespace OrderValidation.Client.Global
 
         public ValidationState ValidateTotalPortfolioWeight(decimal totalWeight)
         {
-            throw new NotImplementedException();
+            return totalWeight != 1 ? ValidationState.InvalidWeightState : ValidationState.Success;
         }
     }
 }

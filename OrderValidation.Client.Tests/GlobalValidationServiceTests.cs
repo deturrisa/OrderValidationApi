@@ -156,5 +156,60 @@ namespace OrderValidation.Client.Tests
             Assert.Equal(ValidationState.Success, result);
 
         }
+
+        [Fact]
+        public void ValidateTotalPortfolioWeight_ReturnsInvalidWeightState_WhenTotalPortfolioWeightIsInvalid()
+        {
+            //Arrange
+            var mockLogger = new Mock<ILogger<GlobalValidationService>>();
+            var mockCurrencyValidationService = new Mock<ICurrencyValidationService>(MockBehavior.Strict);
+            var mockStockIdValidationService = new Mock<IStockIdValidationService>(MockBehavior.Strict);
+            var stock = new Stock() { Currency = It.IsAny<string>(), OrderId = It.IsAny<string>(), Weight = 1, NotionalAmount = 1 };
+
+            mockCurrencyValidationService.Setup(x => x.ValidateCurrency(It.IsAny<string>()))
+                .Returns(ValidationState.Success);
+
+            mockStockIdValidationService.Setup(x => x.ValidateOrderId(It.IsAny<string>()))
+                .Returns(ValidationState.Success);
+
+            var totalWeight = It.Is<int>(x => x != 1);
+            
+            var sut = new GlobalValidationService(mockLogger.Object, mockCurrencyValidationService.Object, mockStockIdValidationService.Object);
+
+            //Act
+            var result = sut.ValidateTotalPortfolioWeight(totalWeight);
+
+            //Assert
+            Assert.Equal(ValidationState.InvalidWeightState, result);
+
+        }
+
+        [Fact]
+        public void ValidateTotalPortfolioWeight_ReturnsSuccessState_WhenTotalPortfolioWeightIs1()
+        {
+            //Arrange
+            var mockLogger = new Mock<ILogger<GlobalValidationService>>();
+            var mockCurrencyValidationService = new Mock<ICurrencyValidationService>(MockBehavior.Strict);
+            var mockStockIdValidationService = new Mock<IStockIdValidationService>(MockBehavior.Strict);
+            var stock = new Stock() { Currency = It.IsAny<string>(), OrderId = It.IsAny<string>(), Weight = 1, NotionalAmount = 1 };
+
+            mockCurrencyValidationService.Setup(x => x.ValidateCurrency(It.IsAny<string>()))
+                .Returns(ValidationState.Success);
+
+            mockStockIdValidationService.Setup(x => x.ValidateOrderId(It.IsAny<string>()))
+                .Returns(ValidationState.Success);
+
+            const int totalWeight = 1;
+
+            var sut = new GlobalValidationService(mockLogger.Object, mockCurrencyValidationService.Object, mockStockIdValidationService.Object);
+
+            //Act
+            var result = sut.ValidateTotalPortfolioWeight(totalWeight);
+
+            //Assert
+            Assert.Equal(ValidationState.Success, result);
+
+        }
+
     }
 }
