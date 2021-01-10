@@ -53,14 +53,15 @@ namespace OrderValidation.Client.Clients
             
             return ValidationState.Success;
         }
+
+        public ValidationState ValidatePortfolioNotionalAmount(decimal amount)
+        {
+            return ValidationState.Success;
+        }
+
         public ValidationState ValidateType(OrderType orderType)
         {
             return orderType != SupportedOrderType ? ValidationState.UnsupportedType : ValidationState.Success;
-        }
-
-        public ValidationState ValidatePortfolioNotionalAmount(decimal notionalAmountTotal)
-        {
-            throw new NotImplementedException(); //TODO: delete when moved from interface
         }
 
         public ValidationState ValidateDestination(string destination)
