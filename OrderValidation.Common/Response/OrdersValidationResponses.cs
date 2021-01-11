@@ -36,6 +36,8 @@ namespace OrderValidation.Common
             new OrdersValidationResponse(20006, "The currency does not meet the ISO217 format");
         public static OrdersValidationResponse Success { get; } =
             new OrdersValidationResponse(30000, "The orders were successfully validated",true);
+        public static OrdersValidationResponse UnknownError { get; } =
+            new OrdersValidationResponse(30000, "An Unknown Error has occurred");
 
     }
 }
