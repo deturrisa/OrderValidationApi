@@ -21,7 +21,6 @@ namespace OrderValidation.ChildOrder.Tests
             //Arrange
             var mockLogger = new Mock<ILogger<StockIdValidationService>>();
             var mockDateTimeWrapper = new Mock<IDateTimeWrapper>(MockBehavior.Strict);
-            var memoryCache = new MemoryCache(new MemoryCacheOptions());
 
             mockDateTimeWrapper.Setup(x => x.Now()).Returns(dateTime);
 
@@ -29,10 +28,10 @@ namespace OrderValidation.ChildOrder.Tests
 
             var orderId = $"QF-{expectedDate}-{index}";
 
-            var sut = new StockIdValidationService(mockDateTimeWrapper.Object, mockLogger.Object, memoryCache);
+            var sut = new StockIdValidationService(mockDateTimeWrapper.Object, mockLogger.Object);
 
             //Act
-            var result = sut.ValidateOrderId(orderId);
+            var result = sut.ValidateOrderId(orderId,0);
 
             //Assert
             Assert.Equal(ValidationState.Success, result);
@@ -44,7 +43,6 @@ namespace OrderValidation.ChildOrder.Tests
             //Arrange
             var mockLogger = new Mock<ILogger<StockIdValidationService>>();
             var mockDateTimeWrapper = new Mock<IDateTimeWrapper>(MockBehavior.Strict);
-            var memoryCache = new MemoryCache(new MemoryCacheOptions());
 
             mockDateTimeWrapper.Setup(x => x.Now()).Returns(dateTime.AddDays(1));
 
@@ -52,10 +50,10 @@ namespace OrderValidation.ChildOrder.Tests
 
             var orderId = $"QF-{expectedDate}-{index}";
 
-            var sut = new StockIdValidationService(mockDateTimeWrapper.Object, mockLogger.Object, memoryCache);
+            var sut = new StockIdValidationService(mockDateTimeWrapper.Object, mockLogger.Object);
 
             //Act
-            var result = sut.ValidateOrderId(orderId);
+            var result = sut.ValidateOrderId(orderId,0);
 
             //Assert
             Assert.Equal(ValidationState.InvalidOrderId, result);
@@ -69,7 +67,6 @@ namespace OrderValidation.ChildOrder.Tests
             //Arrange
             var mockLogger = new Mock<ILogger<StockIdValidationService>>();
             var mockDateTimeWrapper = new Mock<IDateTimeWrapper>(MockBehavior.Strict);
-            var memoryCache = new MemoryCache(new MemoryCacheOptions());
 
             mockDateTimeWrapper.Setup(x => x.Now()).Returns(dateTime);
 
@@ -77,16 +74,12 @@ namespace OrderValidation.ChildOrder.Tests
 
             currentIndex -= previousIndex;
 
-            var previousOrderId = $"QF-{expectedDate}-{previousIndex}";
-
             var currentOrderId = $"QF-{expectedDate}-{currentIndex}";
 
-            var sut = new StockIdValidationService(mockDateTimeWrapper.Object, mockLogger.Object, memoryCache);
-
-            sut.ValidateOrderId(previousOrderId);
+            var sut = new StockIdValidationService(mockDateTimeWrapper.Object, mockLogger.Object);
 
             //Act
-            var result = sut.ValidateOrderId(currentOrderId);
+            var result = sut.ValidateOrderId(currentOrderId, previousIndex);
 
             //Assert
             Assert.Equal(ValidationState.InvalidOrderId, result);
@@ -100,7 +93,6 @@ namespace OrderValidation.ChildOrder.Tests
             //Arrange
             var mockLogger = new Mock<ILogger<StockIdValidationService>>();
             var mockDateTimeWrapper = new Mock<IDateTimeWrapper>(MockBehavior.Strict);
-            var memoryCache = new MemoryCache(new MemoryCacheOptions());
 
             mockDateTimeWrapper.Setup(x => x.Now()).Returns(new DateTime());
 
@@ -108,16 +100,12 @@ namespace OrderValidation.ChildOrder.Tests
 
             currentIndex -= previousIndex;
 
-            var previousOrderId = $"QF-{expectedDate}-{previousIndex}";
-
             var currentOrderId = $"QF-{expectedDate}-{currentIndex}";
 
-            var sut = new StockIdValidationService(mockDateTimeWrapper.Object, mockLogger.Object, memoryCache);
-
-            sut.ValidateOrderId(previousOrderId);
+            var sut = new StockIdValidationService(mockDateTimeWrapper.Object, mockLogger.Object);
 
             //Act
-            var result = sut.ValidateOrderId(currentOrderId);
+            var result = sut.ValidateOrderId(currentOrderId,previousIndex);
 
             //Assert
             Assert.Equal(ValidationState.InvalidOrderId, result);
@@ -129,14 +117,13 @@ namespace OrderValidation.ChildOrder.Tests
             //Arrange
             var mockLogger = new Mock<ILogger<StockIdValidationService>>();
             var mockDateTimeWrapper = new Mock<IDateTimeWrapper>(MockBehavior.Strict);
-            var memoryCache = new MemoryCache(new MemoryCacheOptions());
 
             mockDateTimeWrapper.Setup(x => x.Now()).Returns(new DateTime());
 
-            var sut = new StockIdValidationService(mockDateTimeWrapper.Object, mockLogger.Object, memoryCache);
+            var sut = new StockIdValidationService(mockDateTimeWrapper.Object, mockLogger.Object);
 
             //Act
-            var result = sut.ValidateOrderId(new Guid().ToString());
+            var result = sut.ValidateOrderId(new Guid().ToString(),0);
 
             //Assert
             Assert.Equal(ValidationState.InvalidOrderId, result);
@@ -144,29 +131,25 @@ namespace OrderValidation.ChildOrder.Tests
 
         [Theory, AutoData]
         public void
-            ValidateOrderId_ReturnsSuccessState_WhenOrderId_IsEqualToDateTimeNow_AndFirstOrderIdIsGreaterThanPreviousOrderId(
+            ValidateOrderId_ReturnsSuccessState_WhenOrderId_IsEqualToDateTimeNow_AndOrderIdIsGreaterThanPreviousOrderId(
                 DateTime dateTime, int currentIndex, int previousIndex)
         {
             //Arrange
             var mockLogger = new Mock<ILogger<StockIdValidationService>>();
             var mockDateTimeWrapper = new Mock<IDateTimeWrapper>(MockBehavior.Strict);
-            var memoryCache = new MemoryCache(new MemoryCacheOptions());
 
             mockDateTimeWrapper.Setup(x => x.Now()).Returns(dateTime);
 
             var expectedDate = $"{dateTime.Day:00}/{dateTime.Month:00}/{dateTime.Year}";
 
-            currentIndex -= previousIndex;
-
-            var previousOrderId = $"QF-{expectedDate}-{previousIndex}";
+            currentIndex += previousIndex;
 
             var currentOrderId = $"QF-{expectedDate}-{currentIndex}";
 
-            var sut = new StockIdValidationService(mockDateTimeWrapper.Object, mockLogger.Object, memoryCache);
-            sut.ValidateOrderId(previousOrderId);
-            
+            var sut = new StockIdValidationService(mockDateTimeWrapper.Object, mockLogger.Object);
+
             //Act
-            var result = sut.ValidateOrderId(currentOrderId);
+            var result = sut.ValidateOrderId(currentOrderId,previousIndex);
 
             //Assert
             Assert.Equal(ValidationState.Success, result);

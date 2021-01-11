@@ -40,13 +40,11 @@ namespace OrderValidation.Client.Tests
             var mockLogger = new Mock<ILogger<GlobalValidationService>>();
             var mockCurrencyValidationService = new Mock<ICurrencyValidationService>(MockBehavior.Strict);
             var mockStockIdValidationService = new Mock<IStockIdValidationService>(MockBehavior.Strict);
-            var stock = new Stock() {Currency = It.IsAny<string>(), OrderId = It.IsAny<string>()};
-            
+            var stock = new Stock() { Currency = It.IsAny<string>(), OrderId = $"QF-{DateTime.Now}-{It.IsAny<int>()}", Weight = It.Is<int>(x => x > 0) };
+
             mockCurrencyValidationService.Setup(x => x.ValidateCurrency(It.IsAny<string>()))
                 .Returns(ValidationState.InvalidCurrencyFormat);
-            mockStockIdValidationService.Setup(x => x.ValidateOrderId(stock.OrderId))
-                .Returns(ValidationState.Success);
-            
+
             var sut = new GlobalValidationService(mockLogger.Object, mockCurrencyValidationService.Object, mockStockIdValidationService.Object);
 
             //Act
@@ -64,12 +62,12 @@ namespace OrderValidation.Client.Tests
             var mockLogger = new Mock<ILogger<GlobalValidationService>>();
             var mockCurrencyValidationService = new Mock<ICurrencyValidationService>(MockBehavior.Strict);
             var mockStockIdValidationService = new Mock<IStockIdValidationService>(MockBehavior.Strict);
-            var stock = new Stock() { Currency = It.IsAny<string>(),OrderId = It.IsAny<string>()};
+            var stock = new Stock() { Currency = It.IsAny<string>(), OrderId = $"QF-{DateTime.Now}-{It.IsAny<int>()}", Weight = It.Is<int>(x => x>0), };
 
             mockCurrencyValidationService.Setup(x => x.ValidateCurrency(It.IsAny<string>()))
                 .Returns(ValidationState.Success);
 
-            mockStockIdValidationService.Setup(x => x.ValidateOrderId(It.IsAny<string>()))
+            mockStockIdValidationService.Setup(x => x.ValidateOrderId(It.IsAny<string>(), It.IsAny<int>()))
                 .Returns(ValidationState.InvalidOrderId);
 
             var sut = new GlobalValidationService(mockLogger.Object, mockCurrencyValidationService.Object, mockStockIdValidationService.Object);
@@ -89,12 +87,12 @@ namespace OrderValidation.Client.Tests
             var mockLogger = new Mock<ILogger<GlobalValidationService>>();
             var mockCurrencyValidationService = new Mock<ICurrencyValidationService>(MockBehavior.Strict);
             var mockStockIdValidationService = new Mock<IStockIdValidationService>(MockBehavior.Strict);
-            var stock = new Stock() { Currency = It.IsAny<string>(), OrderId = It.IsAny<string>(), Weight = -1};
+            var stock = new Stock() { Currency = It.IsAny<string>(), OrderId = $"QF-{DateTime.Now}-{It.IsAny<int>()}", Weight = -1,};
 
             mockCurrencyValidationService.Setup(x => x.ValidateCurrency(It.IsAny<string>()))
                 .Returns(ValidationState.Success);
 
-            mockStockIdValidationService.Setup(x => x.ValidateOrderId(It.IsAny<string>()))
+            mockStockIdValidationService.Setup(x => x.ValidateOrderId(It.IsAny<string>(),It.IsAny<int>()))
                 .Returns(ValidationState.InvalidOrderId);
 
             var sut = new GlobalValidationService(mockLogger.Object, mockCurrencyValidationService.Object, mockStockIdValidationService.Object);
@@ -114,12 +112,12 @@ namespace OrderValidation.Client.Tests
             var mockLogger = new Mock<ILogger<GlobalValidationService>>();
             var mockCurrencyValidationService = new Mock<ICurrencyValidationService>(MockBehavior.Strict);
             var mockStockIdValidationService = new Mock<IStockIdValidationService>(MockBehavior.Strict);
-            var stock = new Stock() { Currency = It.IsAny<string>(), OrderId = It.IsAny<string>(), Weight = 1, NotionalAmount = -1m};
+            var stock = new Stock() { Currency = It.IsAny<string>(), OrderId = $"QF-{DateTime.Now}-{It.IsAny<int>()}", Weight = It.Is<int>(x => x > 0),NotionalAmount = -1};
 
             mockCurrencyValidationService.Setup(x => x.ValidateCurrency(It.IsAny<string>()))
                 .Returns(ValidationState.Success);
 
-            mockStockIdValidationService.Setup(x => x.ValidateOrderId(It.IsAny<string>()))
+            mockStockIdValidationService.Setup(x => x.ValidateOrderId(It.IsAny<string>(), It.IsAny<int>()))
                 .Returns(ValidationState.Success);
 
             var sut = new GlobalValidationService(mockLogger.Object, mockCurrencyValidationService.Object, mockStockIdValidationService.Object);
@@ -139,12 +137,12 @@ namespace OrderValidation.Client.Tests
             var mockLogger = new Mock<ILogger<GlobalValidationService>>();
             var mockCurrencyValidationService = new Mock<ICurrencyValidationService>(MockBehavior.Strict);
             var mockStockIdValidationService = new Mock<IStockIdValidationService>(MockBehavior.Strict);
-            var stock = new Stock() { Currency = It.IsAny<string>(), OrderId = It.IsAny<string>(), Weight = 1, NotionalAmount = 1 };
+            var stock = new Stock() { Currency = It.IsAny<string>(), OrderId = $"QF-{DateTime.Now}-{It.IsAny<int>()}", Weight = It.Is<int>(x => x > 0), };
 
             mockCurrencyValidationService.Setup(x => x.ValidateCurrency(It.IsAny<string>()))
                 .Returns(ValidationState.Success);
 
-            mockStockIdValidationService.Setup(x => x.ValidateOrderId(It.IsAny<string>()))
+            mockStockIdValidationService.Setup(x => x.ValidateOrderId(It.IsAny<string>(), It.IsAny<int>()))
                 .Returns(ValidationState.Success);
 
             var sut = new GlobalValidationService(mockLogger.Object, mockCurrencyValidationService.Object, mockStockIdValidationService.Object);
@@ -164,13 +162,13 @@ namespace OrderValidation.Client.Tests
             var mockLogger = new Mock<ILogger<GlobalValidationService>>();
             var mockCurrencyValidationService = new Mock<ICurrencyValidationService>(MockBehavior.Strict);
             var mockStockIdValidationService = new Mock<IStockIdValidationService>(MockBehavior.Strict);
-            var stock = new Stock() { Currency = It.IsAny<string>(), OrderId = It.IsAny<string>(), Weight = 1, NotionalAmount = 1 };
+            var stock = new Stock() { Currency = It.IsAny<string>(), OrderId = $"QF-{DateTime.Now}-{It.IsAny<int>()}", Weight = -1, };
 
             mockCurrencyValidationService.Setup(x => x.ValidateCurrency(It.IsAny<string>()))
                 .Returns(ValidationState.Success);
 
-            mockStockIdValidationService.Setup(x => x.ValidateOrderId(It.IsAny<string>()))
-                .Returns(ValidationState.Success);
+            mockStockIdValidationService.Setup(x => x.ValidateOrderId(It.IsAny<string>(), It.IsAny<int>()))
+                .Returns(ValidationState.InvalidOrderId);
 
             var totalWeight = It.Is<int>(x => x != 1);
             
@@ -191,13 +189,13 @@ namespace OrderValidation.Client.Tests
             var mockLogger = new Mock<ILogger<GlobalValidationService>>();
             var mockCurrencyValidationService = new Mock<ICurrencyValidationService>(MockBehavior.Strict);
             var mockStockIdValidationService = new Mock<IStockIdValidationService>(MockBehavior.Strict);
-            var stock = new Stock() { Currency = It.IsAny<string>(), OrderId = It.IsAny<string>(), Weight = 1, NotionalAmount = 1 };
+            var stock = new Stock() { Currency = It.IsAny<string>(), OrderId = $"QF-{DateTime.Now}-{It.IsAny<int>()}", Weight = -1, };
 
             mockCurrencyValidationService.Setup(x => x.ValidateCurrency(It.IsAny<string>()))
                 .Returns(ValidationState.Success);
 
-            mockStockIdValidationService.Setup(x => x.ValidateOrderId(It.IsAny<string>()))
-                .Returns(ValidationState.Success);
+            mockStockIdValidationService.Setup(x => x.ValidateOrderId(It.IsAny<string>(), It.IsAny<int>()))
+                .Returns(ValidationState.InvalidOrderId);
 
             const int totalWeight = 1;
 

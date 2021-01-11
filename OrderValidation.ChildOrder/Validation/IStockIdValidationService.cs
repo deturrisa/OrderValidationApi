@@ -4,6 +4,6 @@ namespace OrderValidation.ChildOrder.Validation
 {
     public interface IStockIdValidationService
     {
-        ValidationState ValidateOrderId(string stockId);
+        ValidationState ValidateOrderId(string stockId,int previousIndex);
     }
 }
