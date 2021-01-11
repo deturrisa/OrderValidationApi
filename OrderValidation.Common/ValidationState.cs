@@ -20,6 +20,7 @@ namespace OrderValidation.Common
         MinimumStockNotionalAmountNotMet=11,
         MinimumPortfolioNotionalAmountNotMet=12,
         MaximumPortfolioNotionalAmountNotMet=14,
-        NegativeNotionalWeight=15
+        NegativeNotionalWeight=15,
+        InvalidCurrencySymbol=16
     }
 }
