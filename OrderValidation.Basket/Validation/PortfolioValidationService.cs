@@ -57,6 +57,9 @@ namespace OrderValidation.Basket.Validation
 
             foreach (var stock in portfolio.GetStocks())
             {
+                //This is based off the assumption that a portfolio can have one client Id only. Multiple clientId's in a single basket would result in validation conflict
+                stock.ClientId = clientId;  
+                
                 _logger.LogTrace($"Validating stock with global rules, OrderId ='{stock.OrderId}'");
                 
                 var globalValidateStockResponse = _globalValidationService.ValidateStock(stock);
@@ -100,7 +103,7 @@ namespace OrderValidation.Basket.Validation
             if (totalPortfolioNotionalAmountResponse != ValidationState.Success)
             {
                 _logger.LogWarning(
-                    $"Failed validating stock with {clientValidation.GetType().Name} total notional amount rules");
+                    $"Failed validating stock with {clientId} total notional amount rules");
                 
                 return totalPortfolioNotionalAmountResponse;
             }
