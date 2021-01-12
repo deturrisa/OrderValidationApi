@@ -19,7 +19,7 @@ namespace OrderValidation.Client.Clients
         
         private const string SupportedCurrency = "USD";
 
-        private const decimal MaximumBasketNotionalAmount = 10000;
+        private const decimal MaximumBasketNotionalAmount = 100000;
         
         public ClientCValidationService(ILogger<ClientCValidationService> logger)
         {

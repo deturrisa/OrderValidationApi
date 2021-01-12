@@ -14,7 +14,7 @@ namespace OrderValidation.Client.Global
         private readonly ILogger<GlobalValidationService> _logger;
         private readonly ICurrencyValidationService _currencyValidationService;
         private readonly IStockIdValidationService _stockValidationService;
-        private static int _previousIndex;
+        private int _previousIndex;
         public GlobalValidationService(ILogger<GlobalValidationService> logger, ICurrencyValidationService currencyValidationService, IStockIdValidationService stockValidationService)
         {
             _logger = logger;

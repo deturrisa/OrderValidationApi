@@ -27,7 +27,7 @@ namespace OrderValidation.Service
             _logger.LogInformation("Created portfolio");
 
             var validationState =_portfolioService.ValidatePortfolio(portfolio, clientId);
-            
+                
             _logger.LogInformation("Received validation state ");
 
             var response = BuildResponse(validationState);

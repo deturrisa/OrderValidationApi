@@ -84,7 +84,7 @@ namespace OrderValidation.Client.Tests.Clients
 
             var sut = new ClientCValidationService(mockLogger.Object);
 
-            var notionalAmount = amount + 10000;
+            var notionalAmount = amount + 100000;
 
             //Act
             var result = sut.ValidatePortfolioNotionalAmount(notionalAmount);

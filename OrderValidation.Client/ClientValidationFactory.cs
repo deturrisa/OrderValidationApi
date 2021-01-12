@@ -8,15 +8,15 @@ namespace OrderValidation.Client
     {
         private readonly IDictionary<string, Func<IClientValidation>> _clientValidationDictionary;
 
-        public ClientValidationFactory(Lazy<IClientAValidationService> clientAValidationService,
-            Lazy<IClientBValidationService> clientBValidationService,
-            Lazy<IClientCValidationService> clientCValidationService)
+        public ClientValidationFactory(IClientAValidationService clientAValidationService,
+            IClientBValidationService clientBValidationService,
+            IClientCValidationService clientCValidationService)
         {
             _clientValidationDictionary = new Dictionary<string, Func<IClientValidation>>
             {
-                {"A",() => clientAValidationService.Value },
-                {"B",() => clientBValidationService.Value },
-                {"C",() => clientCValidationService.Value }
+                {"A",() => clientAValidationService },
+                {"B",() => clientBValidationService },
+                {"C",() => clientCValidationService }
             };
         }
         public IClientValidation GetClientValidation(string clientId)

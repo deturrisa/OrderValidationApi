@@ -20,6 +20,8 @@ namespace OrderValidation.Common
             new OrdersValidationResponse(10007, "Portfolio basket cannot be empty");
         public static OrdersValidationResponse InvalidSymbol { get; } =
             new OrdersValidationResponse(10008, "Currency symbol is invalid");
+        public static OrdersValidationResponse NullRequest { get; } =
+            new OrdersValidationResponse(10009, "Request cannot be null");
         public static OrdersValidationResponse UnsupportedType { get; } =
             new OrdersValidationResponse(20001, "The type is not supported for this client");
         public static OrdersValidationResponse UnsupportedCurrency { get; } =
@@ -33,7 +35,7 @@ namespace OrderValidation.Common
         public static OrdersValidationResponse MaximumStockNotionalAmountNotMet { get; } =
             new OrdersValidationResponse(20006, "The maximum stock notional amount for this client has been exceeded");
         public static OrdersValidationResponse InvalidCurrencyFormat { get; } =
-            new OrdersValidationResponse(20006, "The currency does not meet the ISO217 format");
+            new OrdersValidationResponse(20006, "The currency does not meet the ISO4217 format");
         public static OrdersValidationResponse Success { get; } =
             new OrdersValidationResponse(30000, "The orders were successfully validated",true);
         public static OrdersValidationResponse UnknownError { get; } =

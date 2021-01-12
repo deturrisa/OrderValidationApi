@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OrderValidation.Basket\OrderValidation.Basket.csproj" />
+    <ProjectReference Include="..\OrderValidation.Common\OrderValidation.Common.csproj" />
+    <ProjectReference Include="..\OrderValidation.Service\OrderValidation.Service.csproj" />
+  </ItemGroup>
+
+
+</Project>
