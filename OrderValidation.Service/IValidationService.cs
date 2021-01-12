@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using OrderValidation.Common.Requests;
+﻿using OrderValidation.Common.Requests;
 
 namespace OrderValidation.Service
 {

@@ -1,17 +1,9 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using OrderValidation.Basket.Validation;
 using OrderValidation.ChildOrder.Validation;
 using OrderValidation.Client;
@@ -19,9 +11,6 @@ using OrderValidation.Client.Clients;
 using OrderValidation.Client.Clients.Interfaces;
 using OrderValidation.Client.Global;
 using OrderValidation.Common.DateTimeWrapper;
-using OrderValidation.Common.Destination;
-using OrderValidation.Common.NotionalValidation;
-using OrderValidation.Common.Type;
 using OrderValidation.Currency.Validation;
 using OrderValidation.Service;
 

@@ -1,6 +1,4 @@
 ﻿using OrderValidation.Common;
-using OrderValidation.Common.NotionalValidation;
-using OrderValidation.Common.Type;
 using OrderValidation.Currency.Validation;
 
 namespace OrderValidation.Client.Clients.Interfaces

@@ -1,8 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
 using OrderValidation.Common;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using OrderValidation.Currency.Validation;
 using OrderValidation.ChildOrder.Validation;
 using OrderValidation.Common.Extensions;

@@ -1,13 +1,10 @@
 ﻿using AutoFixture.Xunit2;
-using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using Moq;
 using OrderValidation.ChildOrder.Validation;
 using OrderValidation.Common;
 using OrderValidation.Common.DateTimeWrapper;
 using System;
-using System.Linq;
-using AutoFixture;
 using Xunit;
 
 namespace OrderValidation.ChildOrder.Tests

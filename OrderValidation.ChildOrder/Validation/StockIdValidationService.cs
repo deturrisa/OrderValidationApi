@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading;
-using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using OrderValidation.Common;
 using OrderValidation.Common.Extensions;

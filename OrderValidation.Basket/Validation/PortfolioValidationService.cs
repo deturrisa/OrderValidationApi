@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Microsoft.Extensions.Logging;
 using OrderValidation.Client;
-using OrderValidation.Client.Clients;
 using OrderValidation.Client.Clients.Interfaces;
 using OrderValidation.Client.Global;
 using OrderValidation.Common;

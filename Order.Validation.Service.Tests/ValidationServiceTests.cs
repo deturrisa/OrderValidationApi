@@ -1,9 +1,6 @@
-using System;
 using System.Collections.Generic;
 using AutoFixture.Xunit2;
 using Microsoft.Extensions.Logging;
-using Microsoft.VisualBasic.CompilerServices;
-using Microsoft.VisualStudio.TestPlatform.ObjectModel.Logging;
 using Moq;
 using OrderValidation.Basket.Validation;
 using OrderValidation.Common;

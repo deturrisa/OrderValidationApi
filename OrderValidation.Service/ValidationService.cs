@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using OrderValidation.Basket.Validation;
 using OrderValidation.Common;
 using OrderValidation.Common.Requests;

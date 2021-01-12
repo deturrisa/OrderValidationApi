@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using OrderValidation.Client.Clients.Interfaces;
 using OrderValidation.Common;
 using OrderValidation.Common.Type;

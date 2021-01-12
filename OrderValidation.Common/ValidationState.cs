@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace OrderValidation.Common
+﻿namespace OrderValidation.Common
 {
     public enum ValidationState
     {
