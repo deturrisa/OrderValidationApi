@@ -7,6 +7,7 @@ namespace OrderValidation.Common
     public class Portfolio : IEnumerable<Stock>
     {
         private List<Stock> _stocks = new List<Stock>();
+        public string Symbol { get; set; }
         public int Count => _stocks.Count;
 
         public decimal SumOrderWeight() => _stocks.Sum(x => x.Weight);

@@ -62,7 +62,7 @@ namespace OrderValidation.ChildOrder.Tests
         [Theory, AutoData]
         public void
             ValidateOrderId_ReturnsInvalidOrderIdState_WhenOrderId_IsEqualToDateTimeNow_AndOrderIdIndexIsLessThanPreviousOrderIdIndex(
-                DateTime dateTime, int currentIndex, int previousIndex)
+                DateTime dateTime,  int previousIndex)
         {
             //Arrange
             var mockLogger = new Mock<ILogger<StockIdValidationService>>();
@@ -72,7 +72,7 @@ namespace OrderValidation.ChildOrder.Tests
 
             var expectedDate = $"{dateTime.Day:00}/{dateTime.Month:00}/{dateTime.Year}";
 
-            currentIndex -= previousIndex;
+            var currentIndex = previousIndex-1;
 
             var currentOrderId = $"QF-{expectedDate}-{currentIndex}";
 

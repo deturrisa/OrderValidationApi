@@ -26,5 +26,6 @@ namespace OrderValidation.Common
         public OrderType OrderType { get; set; }
         public string Destination { get; set; }
         public string ClientId { get; set; }
+        public string Symbol { get; set; }
     }
 }

@@ -58,7 +58,8 @@ namespace OrderValidation.Basket.Validation
             foreach (var stock in portfolio.GetStocks())
             {
                 //This is based off the assumption that a portfolio can have one client Id only. Multiple clientId's in a single basket would result in validation conflict
-                stock.ClientId = clientId;  
+                stock.ClientId = clientId;
+                stock.Symbol = portfolio.Symbol;
                 
                 _logger.LogTrace($"Validating stock with global rules, OrderId ='{stock.OrderId}'");
                 

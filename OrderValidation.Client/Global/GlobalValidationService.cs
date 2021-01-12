@@ -37,6 +37,11 @@ namespace OrderValidation.Client.Global
 
         public ValidationState ValidateStock(Stock stock)
         {
+            if (stock.Symbol != "$")
+            {
+                _logger.LogTrace($"Symbol: {stock.Symbol} not supported");
+                return ValidationState.InvalidCurrencySymbol;
+            }
             if (stock.NotionalAmount < 0)
             {
                 _logger.LogTrace($"Stock Notional Amount = {stock.NotionalAmount} cannot be negative");
