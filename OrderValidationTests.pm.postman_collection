@@ -1,0 +1,1116 @@
+{
+	"info": {
+		"_postman_id": "8df7b4cc-bd82-49da-9522-9eee7204b2ed",
+		"name": "OrderValidationTests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Client A Validation",
+			"item": [
+				{
+					"name": "Client A Unsupported currency",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const moment = require('moment');\r",
+									"pm.globals.set(\"today\", moment().format(\"DD/MM/YYYY\"));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"stocks\": [\r\n    {\r\n      \"weight\": 1,\r\n      \"notionalAmount\": 1,\r\n      \"orderId\": \"QF-{{today}}-1\",\r\n      \"currency\": \"USD\",\r\n      \"orderType\": 0,\r\n      \"destination\": null,\r\n      \"clientId\": null,\r\n      \"symbol\": null\r\n    },\r\n    {\r\n      \"weight\": 0.5,\r\n      \"notionalAmount\": 1000.0,\r\n      \"orderId\": \"QF-{{today}}-2\",\r\n      \"currency\": \"USD\",\r\n      \"orderType\": \"Market\",\r\n      \"destination\": \"DestinationA\"\r\n    }\r\n  ],\r\n  \"symbol\": null\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/order/A",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44386",
+							"path": [
+								"api",
+								"order",
+								"A"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Client A Unsupported OrderType",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const moment = require('moment');\r",
+									"pm.globals.set(\"today\", moment().format(\"DD/MM/YYYY\"));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"stocks\": [\r\n    {\r\n      \"weight\": 1,\r\n      \"notionalAmount\": 1,\r\n      \"orderId\": \"QF-{{today}}-3\",\r\n      \"currency\": \"HKD\",\r\n      \"orderType\": \"Limit\",\r\n      \"destination\": null,\r\n      \"clientId\": null,\r\n      \"symbol\": null\r\n    },\r\n    {\r\n      \"weight\": 0.5,\r\n      \"notionalAmount\": 1000.0,\r\n      \"orderId\": \"QF-{{today}}-4\",\r\n      \"currency\": \"USD\",\r\n      \"orderType\": \"Market\",\r\n      \"destination\": \"DestinationA\"\r\n    }\r\n  ],\r\n  \"symbol\": null\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/order/A",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44386",
+							"path": [
+								"api",
+								"order",
+								"A"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Client A Unsupported Destination",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const moment = require('moment');\r",
+									"pm.globals.set(\"today\", moment().format(\"DD/MM/YYYY\"));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"stocks\": [\r\n    {\r\n      \"weight\": 1,\r\n      \"notionalAmount\": 99,\r\n      \"orderId\": \"QF-{{today}}-4\",\r\n      \"currency\": \"HKD\",\r\n      \"orderType\": \"Market\",\r\n      \"destination\": \"DestinationA\"\r\n    },\r\n    {\r\n      \"weight\": 0.5,\r\n      \"notionalAmount\": 1000.0,\r\n      \"orderId\": \"QF-{{today}}-5\",\r\n      \"currency\": \"USD\",\r\n      \"orderType\": \"Market\",\r\n      \"destination\": \"DestinationA\"\r\n    }\r\n  ],\r\n  \"symbol\": \"$\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/order/A",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44386",
+							"path": [
+								"api",
+								"order",
+								"A"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Client A Success",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const moment = require('moment');\r",
+									"pm.globals.set(\"today\", moment().format(\"DD/MM/YYYY\"));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"stocks\": [\r\n    {\r\n      \"weight\": 0.5,\r\n      \"notionalAmount\": 1000,\r\n      \"orderId\": \"QF-{{today}}-4\",\r\n      \"currency\": \"HKD\",\r\n      \"orderType\": \"Market\",\r\n      \"destination\": \"DestinationA\"\r\n    },\r\n    {\r\n      \"weight\": 0.5,\r\n      \"notionalAmount\": 1000.0,\r\n      \"orderId\": \"QF-{{today}}-5\",\r\n      \"currency\": \"HKD\",\r\n      \"orderType\": \"Market\",\r\n      \"destination\": \"DestinationA\"\r\n    }\r\n  ],\r\n  \"symbol\": \"$\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/order/A",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44386",
+							"path": [
+								"api",
+								"order",
+								"A"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Client B Validation",
+			"item": [
+				{
+					"name": "Client B Unsupported currency",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const moment = require('moment');\r",
+									"pm.globals.set(\"today\", moment().format(\"DD/MM/YYYY\"));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"stocks\": [\r\n    {\r\n      \"weight\": 1,\r\n      \"notionalAmount\": 1,\r\n      \"orderId\": \"QF-{{today}}-1\",\r\n      \"currency\": \"HKD\",\r\n      \"orderType\": 0,\r\n      \"destination\": null,\r\n      \"clientId\": null,\r\n      \"symbol\": \"$\"\r\n    },\r\n    {\r\n      \"weight\": 0.5,\r\n      \"notionalAmount\": 1000.0,\r\n      \"orderId\": \"QF-{{today}}-2\",\r\n      \"currency\": \"HKD\",\r\n      \"orderType\": \"Market\",\r\n      \"destination\": \"DestinationA\"\r\n    }\r\n  ],\r\n  \"symbol\": null\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/order/B",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44386",
+							"path": [
+								"api",
+								"order",
+								"B"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Client B Unsupported OrderType",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const moment = require('moment');\r",
+									"pm.globals.set(\"today\", moment().format(\"DD/MM/YYYY\"));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"stocks\": [\r\n    {\r\n      \"weight\": 1,\r\n      \"notionalAmount\": 1,\r\n      \"orderId\": \"QF-{{today}}-3\",\r\n      \"currency\": \"USD\",\r\n      \"orderType\": \"Market\",\r\n      \"destination\": null,\r\n      \"clientId\": null,\r\n      \"symbol\": \"$\"\r\n    },\r\n    {\r\n      \"weight\": 0.5,\r\n      \"notionalAmount\": 1000.0,\r\n      \"orderId\": \"QF-{{today}}-4\",\r\n      \"currency\": \"USD\",\r\n      \"orderType\": \"Market\",\r\n      \"destination\": \"DestinationA\"\r\n    }\r\n  ],\r\n  \"symbol\": null\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/order/B",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44386",
+							"path": [
+								"api",
+								"order",
+								"B"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Client B Unsupported Destination",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const moment = require('moment');\r",
+									"pm.globals.set(\"today\", moment().format(\"DD/MM/YYYY\"));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"stocks\": [\r\n    {\r\n      \"weight\": 1,\r\n      \"notionalAmount\": 99,\r\n      \"orderId\": \"QF-{{today}}-4\",\r\n      \"currency\": \"USD\",\r\n      \"orderType\": \"Limit\",\r\n      \"destination\": \"DestinationA\"\r\n    },\r\n    {\r\n      \"weight\": 0.5,\r\n      \"notionalAmount\": 1000.0,\r\n      \"orderId\": \"QF-{{today}}-5\",\r\n      \"currency\": \"USD\",\r\n      \"orderType\": \"Limit\",\r\n      \"destination\": \"DestinationA\"\r\n    }\r\n  ],\r\n  \"symbol\": \"$\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/order/B",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44386",
+							"path": [
+								"api",
+								"order",
+								"B"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Client B Min child notional not met",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const moment = require('moment');\r",
+									"pm.globals.set(\"today\", moment().format(\"DD/MM/YYYY\"));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"stocks\": [\r\n    {\r\n      \"weight\": 1,\r\n      \"notionalAmount\": 99,\r\n      \"orderId\": \"QF-{{today}}-4\",\r\n      \"currency\": \"USD\",\r\n      \"orderType\": \"Limit\",\r\n      \"destination\": \"DestinationB\"\r\n    },\r\n    {\r\n      \"weight\": 0.5,\r\n      \"notionalAmount\": 1000.0,\r\n      \"orderId\": \"QF-{{today}}-5\",\r\n      \"currency\": \"USD\",\r\n      \"orderType\": \"Limit\",\r\n      \"destination\": \"DestinationB\"\r\n    }\r\n  ],\r\n  \"symbol\": \"$\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/order/B",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44386",
+							"path": [
+								"api",
+								"order",
+								"B"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Client B Min basket notional not met",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const moment = require('moment');\r",
+									"pm.globals.set(\"today\", moment().format(\"DD/MM/YYYY\"));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"stocks\": [\r\n    {\r\n      \"weight\": 0.5,\r\n      \"notionalAmount\": 1000.0,\r\n      \"orderId\": \"QF-{{today}}-4\",\r\n      \"currency\": \"USD\",\r\n      \"orderType\": \"Limit\",\r\n      \"destination\": \"DestinationB\"\r\n    },\r\n    {\r\n      \"weight\": 0.5,\r\n      \"notionalAmount\": 1000.0,\r\n      \"orderId\": \"QF-{{today}}-5\",\r\n      \"currency\": \"USD\",\r\n      \"orderType\": \"Limit\",\r\n      \"destination\": \"DestinationB\"\r\n    }\r\n  ],\r\n  \"symbol\": \"$\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/order/B",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44386",
+							"path": [
+								"api",
+								"order",
+								"B"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Client B Success",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const moment = require('moment');\r",
+									"pm.globals.set(\"today\", moment().format(\"DD/MM/YYYY\"));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"stocks\": [\r\n    {\r\n      \"weight\": 0.5,\r\n      \"notionalAmount\": 10000.0,\r\n      \"orderId\": \"QF-{{today}}-4\",\r\n      \"currency\": \"USD\",\r\n      \"orderType\": \"Limit\",\r\n      \"destination\": \"DestinationB\"\r\n    },\r\n    {\r\n      \"weight\": 0.5,\r\n      \"notionalAmount\": 1000.0,\r\n      \"orderId\": \"QF-{{today}}-5\",\r\n      \"currency\": \"USD\",\r\n      \"orderType\": \"Limit\",\r\n      \"destination\": \"DestinationB\"\r\n    }\r\n  ],\r\n  \"symbol\": \"$\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/order/B",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44386",
+							"path": [
+								"api",
+								"order",
+								"B"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Client C Validation",
+			"item": [
+				{
+					"name": "Client B Unsupported currency",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const moment = require('moment');\r",
+									"pm.globals.set(\"today\", moment().format(\"DD/MM/YYYY\"));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"stocks\": [\r\n    {\r\n      \"weight\": 1,\r\n      \"notionalAmount\": 1,\r\n      \"orderId\": \"QF-{{today}}-1\",\r\n      \"currency\": \"HKD\",\r\n      \"orderType\": 0,\r\n      \"destination\": null,\r\n      \"clientId\": null,\r\n      \"symbol\": \"$\"\r\n    },\r\n    {\r\n      \"weight\": 0.5,\r\n      \"notionalAmount\": 1000.0,\r\n      \"orderId\": \"QF-{{today}}-2\",\r\n      \"currency\": \"HKD\",\r\n      \"orderType\": \"Market\",\r\n      \"destination\": \"DestinationA\"\r\n    }\r\n  ],\r\n  \"symbol\": null\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/order/C",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44386",
+							"path": [
+								"api",
+								"order",
+								"C"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Client C Unsupported Destination (Type Market)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const moment = require('moment');\r",
+									"pm.globals.set(\"today\", moment().format(\"DD/MM/YYYY\"));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"stocks\": [\r\n    {\r\n      \"weight\": 1,\r\n      \"notionalAmount\": 99,\r\n      \"orderId\": \"QF-{{today}}-4\",\r\n      \"currency\": \"USD\",\r\n      \"orderType\": \"Market\",\r\n      \"destination\": \"DestinationB\"\r\n    },\r\n    {\r\n      \"weight\": 0.5,\r\n      \"notionalAmount\": 1000.0,\r\n      \"orderId\": \"QF-{{today}}-5\",\r\n      \"currency\": \"USD\",\r\n      \"orderType\": \"Market\",\r\n      \"destination\": \"DestinationB\"\r\n    }\r\n  ],\r\n  \"symbol\": \"$\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/order/C",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44386",
+							"path": [
+								"api",
+								"order",
+								"C"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Client C Unsupported Destination (Type Limit)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const moment = require('moment');\r",
+									"pm.globals.set(\"today\", moment().format(\"DD/MM/YYYY\"));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"stocks\": [\r\n    {\r\n      \"weight\": 1,\r\n      \"notionalAmount\": 99,\r\n      \"orderId\": \"QF-{{today}}-4\",\r\n      \"currency\": \"USD\",\r\n      \"orderType\": \"Limit\",\r\n      \"destination\": \"DestinationA\"\r\n    },\r\n    {\r\n      \"weight\": 0.5,\r\n      \"notionalAmount\": 1000.0,\r\n      \"orderId\": \"QF-{{today}}-5\",\r\n      \"currency\": \"USD\",\r\n      \"orderType\": \"Limit\",\r\n      \"destination\": \"DestinationA\"\r\n    }\r\n  ],\r\n  \"symbol\": \"$\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/order/B",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44386",
+							"path": [
+								"api",
+								"order",
+								"B"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Client C Max basket notional exceeded",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const moment = require('moment');\r",
+									"pm.globals.set(\"today\", moment().format(\"DD/MM/YYYY\"));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"stocks\": [\r\n    {\r\n      \"weight\": 0.5,\r\n      \"notionalAmount\": 10000.0,\r\n      \"orderId\": \"QF-{{today}}-4\",\r\n      \"currency\": \"USD\",\r\n      \"orderType\": \"Limit\",\r\n      \"destination\": \"DestinationB\"\r\n    },\r\n    {\r\n      \"weight\": 0.5,\r\n      \"notionalAmount\": 10000.0,\r\n      \"orderId\": \"QF-{{today}}-5\",\r\n      \"currency\": \"USD\",\r\n      \"orderType\": \"Limit\",\r\n      \"destination\": \"DestinationB\"\r\n    }\r\n  ],\r\n  \"symbol\": \"$\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/order/C",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44386",
+							"path": [
+								"api",
+								"order",
+								"C"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Client C Success",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const moment = require('moment');\r",
+									"pm.globals.set(\"today\", moment().format(\"DD/MM/YYYY\"));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"stocks\": [\r\n    {\r\n      \"weight\": 0.5,\r\n      \"notionalAmount\": 10000.0,\r\n      \"orderId\": \"QF-{{today}}-4\",\r\n      \"currency\": \"USD\",\r\n      \"orderType\": \"Limit\",\r\n      \"destination\": \"DestinationB\"\r\n    },\r\n    {\r\n      \"weight\": 0.5,\r\n      \"notionalAmount\": 10000.0,\r\n      \"orderId\": \"QF-{{today}}-5\",\r\n      \"currency\": \"USD\",\r\n      \"orderType\": \"Limit\",\r\n      \"destination\": \"DestinationB\"\r\n    }\r\n  ],\r\n  \"symbol\": \"$\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/order/C",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44386",
+							"path": [
+								"api",
+								"order",
+								"C"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Client Not Found",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const moment = require('moment');\r",
+							"pm.globals.set(\"today\", moment().format(\"MM/DD/YYYY\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"stocks\": [\r\n    {\r\n      \"weight\": 0.5,\r\n      \"notionalAmount\": 1000.0,\r\n      \"orderId\": \"QF-12/01/2021-1\",\r\n      \"currency\": null,\r\n      \"orderType\": 0,\r\n      \"destination\": null,\r\n    },\r\n    {\r\n      \"weight\": 0.5,\r\n      \"notionalAmount\": 1000.0,\r\n      \"orderId\": \"QF-12/01/2021-2\",\r\n      \"currency\": \"HKD\",\r\n      \"orderType\": \"Market\",\r\n      \"destination\": \"DestinationA\"\r\n    }\r\n  ],\r\n  \"symbol\": \"$\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/order/x",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44386",
+					"path": [
+						"api",
+						"order",
+						"x"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invalid symbol",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const moment = require('moment');\r",
+							"pm.globals.set(\"today\", moment().format(\"DD/MM/YYYY\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"stocks\": [\r\n    {\r\n      \"weight\": 0.5,\r\n      \"notionalAmount\": 10000.0,\r\n      \"orderId\": \"QF-{{today}}-4\",\r\n      \"currency\": \"USD\",\r\n      \"orderType\": \"Limit\",\r\n      \"destination\": \"DestinationB\"\r\n    },\r\n    {\r\n      \"weight\": 0.5,\r\n      \"notionalAmount\": 10000.0,\r\n      \"orderId\": \"QF-{{today}}-5\",\r\n      \"currency\": \"USD\",\r\n      \"orderType\": \"Limit\",\r\n      \"destination\": \"DestinationB\"\r\n    }\r\n  ],\r\n  \"symbol\": \"$\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/order/C",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44386",
+					"path": [
+						"api",
+						"order",
+						"C"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invalid OrderId Index",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const moment = require('moment');\r",
+							"pm.globals.set(\"today\", moment().format(\"DD/MM/YYYY\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"stocks\": [\r\n    {\r\n      \"weight\": 0.5,\r\n      \"notionalAmount\": 10000.0,\r\n      \"orderId\": \"QF-{{today}}-100\",\r\n      \"currency\": \"USD\",\r\n      \"orderType\": \"Limit\",\r\n      \"destination\": \"DestinationB\"\r\n    },\r\n    {\r\n      \"weight\": 0.5,\r\n      \"notionalAmount\": 10000.0,\r\n      \"orderId\": \"QF-{{today}}-5\",\r\n      \"currency\": \"USD\",\r\n      \"orderType\": \"Limit\",\r\n      \"destination\": \"DestinationB\"\r\n    }\r\n  ],\r\n  \"symbol\": \"$\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/order/C",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44386",
+					"path": [
+						"api",
+						"order",
+						"C"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Weight properties not equal to1",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const moment = require('moment');\r",
+							"pm.globals.set(\"today\", moment().format(\"DD/MM/YYYY\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"stocks\": [\r\n    {\r\n      \"weight\": 0.4,\r\n      \"notionalAmount\": 101,\r\n      \"orderId\": \"QF-{{today}}-4\",\r\n      \"currency\": \"HKD\",\r\n      \"orderType\": \"Market\",\r\n      \"destination\": \"DestinationA\",\r\n      \"symbol\": \"$\"\r\n    },\r\n    {\r\n      \"weight\": 0.5,\r\n      \"notionalAmount\": 101,\r\n      \"orderId\": \"QF-{{today}}-5\",\r\n      \"currency\": \"HKD\",\r\n      \"orderType\": \"Market\",\r\n      \"destination\": \"DestinationA\"\r\n    }\r\n  ],\r\n  \"symbol\": \"$\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/order/A",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44386",
+					"path": [
+						"api",
+						"order",
+						"A"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Empty Basket",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const moment = require('moment');\r",
+							"pm.globals.set(\"today\", moment().format(\"MM/DD/YYYY\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"stocks\": [\r\n\r\n  ],\r\n  \"symbol\": \"$\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/order/A",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44386",
+					"path": [
+						"api",
+						"order",
+						"A"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Negative Weight",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const moment = require('moment');\r",
+							"pm.globals.set(\"today\", moment().format(\"MM/DD/YYYY\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"stocks\": [\r\n    {\r\n      \"weight\": -1,\r\n      \"notionalAmount\": 1000,\r\n      \"orderId\": \"QF-12/01/2021-1\",\r\n      \"currency\": null,\r\n      \"orderType\": 0,\r\n      \"destination\": null\r\n    },\r\n    {\r\n      \"weight\": 0.5,\r\n      \"notionalAmount\": 1000.0,\r\n      \"orderId\": \"QF-12/01/2021-2\",\r\n      \"currency\": \"HKD\",\r\n      \"orderType\": \"Market\",\r\n      \"destination\": \"DestinationA\"\r\n    }\r\n  ],\r\n  \"symbol\": \"$\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/order/A",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44386",
+					"path": [
+						"api",
+						"order",
+						"A"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Negative NotionalAmount",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const moment = require('moment');\r",
+							"pm.globals.set(\"today\", moment().format(\"MM/DD/YYYY\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"stocks\": [\r\n    {\r\n      \"weight\": 1,\r\n      \"notionalAmount\": -1000,\r\n      \"orderId\": \"QF-12/01/2021-1\",\r\n      \"currency\": null,\r\n      \"orderType\": 0,\r\n      \"destination\": null\r\n    },\r\n    {\r\n      \"weight\": 0.5,\r\n      \"notionalAmount\": 1000.0,\r\n      \"orderId\": \"QF-12/01/2021-2\",\r\n      \"currency\": \"HKD\",\r\n      \"orderType\": \"Market\",\r\n      \"destination\": \"DestinationA\"\r\n    }\r\n  ],\r\n  \"symbol\": \"$\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/order/A",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44386",
+					"path": [
+						"api",
+						"order",
+						"A"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Currency does not meet ISO4217",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const moment = require('moment');\r",
+							"pm.globals.set(\"today\", moment().format(\"MM/DD/YYYY\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"stocks\": [\r\n    {\r\n      \"weight\": 1,\r\n      \"notionalAmount\": 1,\r\n      \"orderId\": \"QF-12/01/2021-1\",\r\n      \"currency\": \"IAmWrong\",\r\n      \"orderType\": 0,\r\n      \"destination\": null,\r\n\r\n    },\r\n    {\r\n      \"weight\": 0.5,\r\n      \"notionalAmount\": 1000.0,\r\n      \"orderId\": \"QF-12/01/2021-2\",\r\n      \"currency\": \"HKD\",\r\n      \"orderType\": \"Market\",\r\n      \"destination\": \"DestinationA\"\r\n    }\r\n  ],\r\n  \"symbol\": \"$\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/order/A",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44386",
+					"path": [
+						"api",
+						"order",
+						"A"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "OrderId Invalid Format",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const moment = require('moment');\r",
+							"pm.globals.set(\"today\", moment().format(\"MM/DD/YYYY\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"stocks\": [\r\n    {\r\n      \"weight\": 1,\r\n      \"notionalAmount\": 1,\r\n      \"orderId\": \"IAmWrong\",\r\n      \"currency\": \"HKD\",\r\n      \"orderType\": 0,\r\n      \"destination\": null,\r\n    },\r\n    {\r\n      \"weight\": 0.5,\r\n      \"notionalAmount\": 1000.0,\r\n      \"orderId\": \"QF-12/01/2021-2\",\r\n      \"currency\": \"HKD\",\r\n      \"orderType\": \"Market\",\r\n      \"destination\": \"DestinationA\"\r\n    }\r\n  ],\r\n  \"symbol\": \"$\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/order/A",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44386",
+					"path": [
+						"api",
+						"order",
+						"A"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "OrderId Invalid Date",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const moment = require('moment');\r",
+							"pm.globals.set(\"today\", moment().format(\"MM/DD/YYYY\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"stocks\": [\r\n    {\r\n      \"weight\": 1,\r\n      \"notionalAmount\": 1,\r\n      \"orderId\": \"QF-12/01/2011-2\",\r\n      \"currency\": \"HKD\",\r\n      \"orderType\": 0,\r\n      \"destination\": null,\r\n    },\r\n    {\r\n      \"weight\": 0.5,\r\n      \"notionalAmount\": 1000.0,\r\n      \"orderId\": \"QF-12/01/2021-2\",\r\n      \"currency\": \"HKD\",\r\n      \"orderType\": \"Market\",\r\n      \"destination\": \"DestinationA\"\r\n    }\r\n  ],\r\n  \"symbol\": \"$\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/order/A",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44386",
+					"path": [
+						"api",
+						"order",
+						"A"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "OrderId Invalid Date Index",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const moment = require('moment');\r",
+							"pm.globals.set(\"today\", moment().format(\"DD/MM/YYYY\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"stocks\": [\r\n    {\r\n      \"weight\": 1,\r\n      \"notionalAmount\": 1,\r\n      \"orderId\": \"QF-{{today}}-2\",\r\n      \"currency\": \"HKD\",\r\n      \"orderType\": 0,\r\n      \"destination\": null\r\n    },\r\n    {\r\n      \"weight\": 0.5,\r\n      \"notionalAmount\": 1000.0,\r\n      \"orderId\": \"QF-{{today}}-1\",\r\n      \"currency\": \"HKD\",\r\n      \"orderType\": \"Market\",\r\n      \"destination\": \"DestinationA\"\r\n    }\r\n  ],\r\n  \"symbol\": \"$\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/order/A",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44386",
+					"path": [
+						"api",
+						"order",
+						"A"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
